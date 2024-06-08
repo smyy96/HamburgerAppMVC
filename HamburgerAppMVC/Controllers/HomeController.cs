@@ -15,6 +15,7 @@ namespace HamburgerAppMVC.Controllers
 
         public IActionResult Index()
         {
+            //sumeyye
             return View();
         }
 

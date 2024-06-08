@@ -20,6 +20,9 @@ namespace HamburgerAppMVC
             }
 
             app.UseHttpsRedirection();
+
+            //Selam :)
+
             app.UseStaticFiles();
 
             app.UseRouting();

@@ -8,6 +8,54 @@ namespace HamburgerAppMVC
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+
+
+            // Ortam adýný almak ve ilgili JSON dosyasýný yüklemek için
+            var env = builder.Environment.EnvironmentName;
+
+            // Ortam adýný konsola yazdýrmak
+            Console.WriteLine($"Running in environment: {env}");
+
+            //// Genel ayar dosyasýný ve ortam özel ayar dosyasýný yüklemek
+            //builder.Configuration
+            //    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            //    .AddJsonFile($"appsettings.{env}.json", optional: true, reloadOnChange: true);
+
+            Console.WriteLine(builder.Configuration.GetConnectionString("AppDbConStr"));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             var connectionString = builder.Configuration.GetConnectionString("AppDbConStr") ?? throw new InvalidOperationException("Connection string 'AppDbContextConnection' not found.");
 
             builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
@@ -19,7 +67,7 @@ namespace HamburgerAppMVC
 
 
             //identity
-            builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AppDbContext>();
+            builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>().AddEntityFrameworkStores<AppDbContext>();//Rolleri de ekledik
 
 
 

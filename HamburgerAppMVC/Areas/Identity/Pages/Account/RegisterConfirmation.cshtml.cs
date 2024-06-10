@@ -72,6 +72,25 @@ namespace HamburgerAppMVC.Areas.Identity.Pages.Account
                     pageHandler: null,
                     values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                     protocol: Request.Scheme);
+
+
+
+
+
+
+
+
+                //mail gönderme
+                var subject = "Uygulamaya giriş yapabilmek için lütfen  aşağıdaki linke tıklayarak doğrulama işlemlerinizi tamamlayınız.";
+
+                await _sender.SendEmailAsync(user.Email, subject, EmailConfirmationUrl);
+
+                //kod satırı bitti SC
+
+
+
+
+
             }
 
             return Page();

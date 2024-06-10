@@ -12,7 +12,17 @@ namespace HamburgerAppMVC
 
             builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 
+
+
+            builder.Services.AddSingleton<MailSenderConfirm>();//mail sender kullanýmý için 
+
+
+
+            //identity
             builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<AppDbContext>();
+
+
+
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

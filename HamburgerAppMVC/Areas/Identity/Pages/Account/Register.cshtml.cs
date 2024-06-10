@@ -80,7 +80,7 @@ namespace HamburgerAppMVC.Areas.Identity.Pages.Account
         {
 
             [Required]
-            [Display(Name = "Name")] 
+            [Display(Name = "Name")]
             public string Name { get; set; }  //sonradan eklendi sc
 
 
@@ -134,6 +134,11 @@ namespace HamburgerAppMVC.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+
+
+                user.Name = Input.Name;
+                user.Surname = Input.Surname;
+
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

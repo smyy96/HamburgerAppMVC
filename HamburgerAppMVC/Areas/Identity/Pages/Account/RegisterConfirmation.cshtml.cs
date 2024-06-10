@@ -19,9 +19,11 @@ namespace HamburgerAppMVC.Areas.Identity.Pages.Account
     public class RegisterConfirmationModel : PageModel
     {
         private readonly UserManager<User> _userManager;
-        private readonly IEmailSender _sender;
+        //private readonly IEmailSender _sender;
 
-        public RegisterConfirmationModel(UserManager<User> userManager, IEmailSender sender)
+        private readonly MailSenderConfirm _sender;//SC
+
+        public RegisterConfirmationModel(UserManager<User> userManager, MailSenderConfirm sender)
         {
             _userManager = userManager;
             _sender = sender;

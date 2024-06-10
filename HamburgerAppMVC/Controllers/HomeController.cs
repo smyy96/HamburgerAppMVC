@@ -1,4 +1,5 @@
 using HamburgerAppMVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -13,16 +14,26 @@ namespace HamburgerAppMVC.Controllers
             _logger = logger;
         }
 
+
+
+
+        [Authorize(Roles = "User")]
         public IActionResult Index()
         {
             //sumeyye
             return View();
         }
 
+
+
+        [Authorize(Roles = "Admin")]
         public IActionResult Privacy()
         {
             return View();
         }
+
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

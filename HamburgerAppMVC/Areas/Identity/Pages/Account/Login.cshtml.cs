@@ -23,10 +23,15 @@ namespace HamburgerAppMVC.Areas.Identity.Pages.Account
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<User> signInManager, ILogger<LoginModel> logger)
+
+        private readonly UserManager<User> _userManager; //login yönlendirme için SC
+
+
+        public LoginModel(SignInManager<User> signInManager, ILogger<LoginModel> logger, UserManager<User> userManager)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _userManager = userManager;
         }
 
         /// <summary>
@@ -116,6 +121,34 @@ namespace HamburgerAppMVC.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+
+
+
+
+
+                    // giriş esnasında role göre controller yönlendirmesi yapma SC
+
+                    var user = await _userManager.FindByEmailAsync(Input.Email); //kullanıcının epostasıile blgilerini alma
+
+                    if (user != null)
+                    {
+                        // Kullanıcının rollerini al
+                        var roles = await _userManager.GetRolesAsync(user);
+
+                        if (roles.Contains("Admin"))
+                        {
+                            return LocalRedirect(Url.Content("~/Home/Privacy"));
+                        }
+                        else if (roles.Contains("User"))
+                        {
+                            return LocalRedirect(Url.Content("~/Home/Index"));
+                        }
+                    }// kod aralıgı bu kadar SC
+
+
+
+
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

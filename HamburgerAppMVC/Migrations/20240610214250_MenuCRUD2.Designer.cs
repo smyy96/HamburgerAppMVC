@@ -4,6 +4,7 @@ using HamburgerAppMVC.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HamburgerAppMVC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240610214250_MenuCRUD2")]
+    partial class MenuCRUD2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -164,35 +167,6 @@ namespace HamburgerAppMVC.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Menus");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Menu1",
-                            IsActive = true,
-                            MenuName = "Menu1",
-                            PictureName = "menu1.jpg",
-                            Price = 100.0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Menu2",
-                            IsActive = true,
-                            MenuName = "Menu2",
-                            PictureName = "menu1.jpg",
-                            Price = 200.0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Menu3",
-                            IsActive = true,
-                            MenuName = "Menu3",
-                            PictureName = "menu1.jpg",
-                            Price = 300.0
-                        });
                 });
 
             modelBuilder.Entity("HamburgerAppMVC.Areas.Identity.Data.Entities.Concrete.MenuDetail", b =>
@@ -332,7 +306,7 @@ namespace HamburgerAppMVC.Migrations
                         {
                             Id = "66A51954-D206-4000-9F81-F73FE061B52D",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a6187889-1957-4d48-b5af-ceea42c17bcb",
+                            ConcurrencyStamp = "0de69e2b-4aaf-42f0-b3d1-8cb46f20ed9d",
                             Email = "kullanici@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
@@ -341,7 +315,7 @@ namespace HamburgerAppMVC.Migrations
                             NormalizedUserName = "KULLANICI@GMAIL.COM",
                             PasswordHash = "AQAAAAIAAYagAAAAEPxaUcQBXHjUxxAfHVSITSYFV7tkSgf4S1YEeppkOo0al0WcB7QNhp7YKFJzZMTN+Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "021b50d3-72a5-4aa8-aa2f-cd66e86893a7",
+                            SecurityStamp = "4e66ee3f-32a0-40e6-a9b5-30ec2360cd37",
                             Surname = "Kullanici Surname",
                             TwoFactorEnabled = false,
                             UserName = "kullanici@gmail.com"
@@ -350,7 +324,7 @@ namespace HamburgerAppMVC.Migrations
                         {
                             Id = "031A45EF-18ED-4BBC-80E5-D0E6FE65908C",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e2754814-e9c8-4b55-835f-a0fac6b20b84",
+                            ConcurrencyStamp = "31505bae-959c-48ae-bd9f-4ba4a2523488",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
@@ -359,7 +333,7 @@ namespace HamburgerAppMVC.Migrations
                             NormalizedUserName = "ADMIN@GMAIL.COM",
                             PasswordHash = "AQAAAAIAAYagAAAAEPxaUcQBXHjUxxAfHVSITSYFV7tkSgf4S1YEeppkOo0al0WcB7QNhp7YKFJzZMTN+Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "88835783-da2b-4aec-8b53-671720238f34",
+                            SecurityStamp = "003aeb9d-732e-4632-aea7-1b682743670d",
                             Surname = "Admin",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"

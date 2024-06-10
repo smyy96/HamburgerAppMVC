@@ -69,6 +69,14 @@ Menü, Kategoriler ve Ekstra Lezetlerin CRUD işlemleri ve tasarımlarına geçe
 
 -------- 10.06.2024 Eyşan Tekinsoy --------
 
-Menu Controller sisteme eklendi
+Concrete dosyasında yer alan Menu sınıfı içerisindeki ""Picture"" prop unu ""PictureName"" olarak güncellendim.
 
-Controller üzerinde Crud İşlemleri gerçekleştirildi.
+wwwroot klasörüne Images dosyası açtım ve içerisine örnek bir menü fotoğrafı ekledim.
+
+Menu Controller sisteme eklendim. Controller üzerinde Crud İşlemlerini gerçekleştirdim.
+
+İndex.cshtml tasarımı ortak tasarıma dönüştürüldü. Listelemedeki datalar seed data olarak eklendi. 
+
+Yeni Menü Ekleme,Silme butonları test edildi çalışıyor. Tasarım kısmında ortak karara göre değişiklik yapılabilir. 
+
+add-migration ve update database yapmayı unutmayın.

@@ -3,5 +3,7 @@
     public interface IBase
     {
         public int Id { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

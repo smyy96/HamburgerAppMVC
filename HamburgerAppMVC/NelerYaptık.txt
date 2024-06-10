@@ -65,3 +65,10 @@ Eklenilen resimlerin hepsi bağlantı yolu olduğundan resim klasörünün için
 
 Menü, Kategoriler ve Ekstra Lezetlerin CRUD işlemleri ve tasarımlarına geçerken _MainSİdebarContainer.cshtml dosyası içindeki asp-controller ve asp-action ifadelerini değiştirmeyi unutmayın.
 
+
+
+-------- 10.06.2024 Eyşan Tekinsoy --------
+
+Menu Controller sisteme eklendi
+
+Controller üzerinde Crud İşlemleri gerçekleştirildi.

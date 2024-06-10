@@ -31,12 +31,18 @@ namespace HamburgerAppMVC.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
+
+        private readonly RoleManager<IdentityRole> _roleManager;//rol için role manager kullanma SC
+
+
+
         public RegisterModel(
             UserManager<User> userManager,
             IUserStore<User> userStore,
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +50,7 @@ namespace HamburgerAppMVC.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
         }
 
         /// <summary>
@@ -135,6 +142,38 @@ namespace HamburgerAppMVC.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+
+
+
+
+
+
+                    // Yeni kullanıcıya User rolü atama SC
+                    if (!await _roleManager.RoleExistsAsync("User"))
+                    {
+                        var roleResult = await _roleManager.CreateAsync(new IdentityRole("User"));
+                        if (!roleResult.Succeeded)
+                        {
+                            foreach (var error in roleResult.Errors)
+                            {
+                                ModelState.AddModelError(string.Empty, error.Description);
+                            }
+                            return Page();
+                        }
+                    }
+
+                    await _userManager.AddToRoleAsync(user, "User");
+                    //  role ekleme işlemi burada bitiyor SC
+
+
+
+
+
+
+
+
+
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

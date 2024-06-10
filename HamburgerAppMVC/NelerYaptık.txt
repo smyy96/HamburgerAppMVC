@@ -1,5 +1,5 @@
 ﻿
----- 10.06.2024 Sümeyye Coşkun ----
+-------- 10.06.2024 Sümeyye Coşkun --------
 
 Identity krulumu yapıldı. program.cs dosyasına app.MapRazorPages(); eklendi 
 
@@ -11,19 +11,13 @@ Bunu HamburgerAppMVC.Areas.Identity.Pages.Account register.cshtml.cs yerden baka
 aynı yerden login.cshtml.cs kısmında ise giriş yapanın rolüne göre sayfa yönlendirmesi yapılacak. Adminse admin paneli acılacak. User ise hamburger ekranı.
 
 
-
 kayıt esnasında mail adresine onay mesajı da gidiyor.
-
 
 
 bunun için program.cs  builder.Services.AddSingleton<MailSenderConfirm>();  eklendi
 daha sonra data klasörüne mailsenderConfirm sınıfı eklendi.
  
  HamburgerAppMVC.Areas.Identity.Pages.Account   RegisterConfirmationModel.cshtml.cs içinede mail göndermesi için kod satırı eklendi
-
-
-
-
 
 
 
@@ -36,5 +30,38 @@ Update-database -Args '--environment Eysan' //eyşan için
 Update-database -Args '--environment Hivda'  //hivda için
 
 
-
 Update-database yapmayı unutmayın.SC
+
+
+
+
+
+
+
+
+-------- 10.06.2024 Hivda Karahan --------
+
+
+Admin Paneli Layout bölümü eklendi.
+
+
+Admin panelini privacy kısmı içeriyor. Bunun için Privacy.cshtml partial view'ına Layout'un _AdminLayout'tan geleceğini belirten ' Layout = "_AdminLayout"; ' ifadesi eklendi.
+
+
+
+_AdminLayout.cshtml adında bir partial view eklendi. 
+
+_AdminLayout.cshtml içinde sırasıyla NavBar, MainSidebarContainer ve Footer adında partial view dosyaları asenkron olarak çağrıldı.
+
+
+_NavBar.cshtml partial view'ı, boş ve beyaz bir navigasyon çubuğunu içeriyor.
+
+_MainSidebarContainer.cshtml, sayfanın admin paneli olduğunu gösteren bir bölüm, admin kullanıcıları ve ikonlarını içeren bir bölüm ve ikonlarıyla beraber 3 alt bölümden oluşuyor. Alt bölüm menü, kategori ve ekstra lezzetleri içeriyor.
+
+_Footer.cshtml, admin paneli olduğunu gösteren bir alt bölümü içeriyor.
+
+
+Eklenilen resimlerin hepsi bağlantı yolu olduğundan resim klasörünün içinde ayrıca belirtmedim.
+
+Menü, Kategoriler ve Ekstra Lezetlerin CRUD işlemleri ve tasarımlarına geçerken _MainSİdebarContainer.cshtml dosyası içindeki asp-controller ve asp-action ifadelerini değiştirmeyi unutmayın.
+

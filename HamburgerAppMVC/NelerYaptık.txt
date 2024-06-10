@@ -1,0 +1,40 @@
+﻿
+---- 10.06.2024 Sümeyye Coşkun ----
+
+Identity krulumu yapıldı. program.cs dosyasına app.MapRazorPages(); eklendi 
+
+Kurulum ile gelen tablolardan user - role- userrole tablolarına "Areas.Identity.Data.EntityConfigurations" içindeki config sınıflarında seed data ile roller ve iki adet kullanıcı eklendi. Admin sistemde bir tane olacağı için hep bu admin ile sisteme giriş yapılacak. Kullanıcı ise istenilen kadar kayıt ekranından kaydedebilirsiniz. Rolleri de seed data ile ekledim bundan sonra kayıt ekranında kayıt olan herkes sisteme user rolü ile otomatik kayıt olacaktır. 
+
+Bunu HamburgerAppMVC.Areas.Identity.Pages.Account register.cshtml.cs yerden bakabilirsiniz.
+
+
+aynı yerden login.cshtml.cs kısmında ise giriş yapanın rolüne göre sayfa yönlendirmesi yapılacak. Adminse admin paneli acılacak. User ise hamburger ekranı.
+
+
+
+kayıt esnasında mail adresine onay mesajı da gidiyor.
+
+
+
+bunun için program.cs  builder.Services.AddSingleton<MailSenderConfirm>();  eklendi
+daha sonra data klasörüne mailsenderConfirm sınıfı eklendi.
+ 
+ HamburgerAppMVC.Areas.Identity.Pages.Account   RegisterConfirmationModel.cshtml.cs içinede mail göndermesi için kod satırı eklendi
+
+
+
+
+
+
+
+ database ayarları için appsetting altında kendi adınıza dosya açtım orada server adınızı değiştirin daha sonra yapacagınız her update-database'in yanına asağıdaki kelimeyi eklemelisiniz
+
+
+Update-database -Args '--environment Eysan' //eyşan için
+
+
+Update-database -Args '--environment Hivda'  //hivda için
+
+
+
+Update-database yapmayı unutmayın.SC

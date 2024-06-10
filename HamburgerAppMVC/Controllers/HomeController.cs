@@ -17,7 +17,7 @@ namespace HamburgerAppMVC.Controllers
 
 
 
-        [Authorize(Roles = "User")]
+        ///[Authorize(Roles = "User")]
         public IActionResult Index()
         {
             //sumeyye
@@ -26,7 +26,7 @@ namespace HamburgerAppMVC.Controllers
 
 
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult Privacy()
         {
             return View();

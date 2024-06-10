@@ -1,0 +1,15 @@
+﻿@using HamburgerAppMVC.Areas.Identity.Data.Entities.Concrete
+@model Menu
+
+<div class="alert alert-danger">
+    @Model.MenuName isimli ürünün resmini kaldırmak istediğinize emin misiniz?
+</div>
+<form asp-action="ResimKaldir" asp-controller="Menu" method="post">
+    <button class="btn btn-danger">EVET</button>
+    <a asp-action="Index" class="btn btn-primary">HAYIR</a>
+    <input asp-for="MenuName" hidden class="form-control" />
+    <input asp-for="Price" hidden class="form-control" />
+    <input asp-for="Description" hidden class="form-control" />
+    <input asp-for="PictureName" hidden class="form-control" />
+
+</form>

@@ -39,7 +39,7 @@ namespace HamburgerAppMVC.Controllers
             }
 
             Menu menu = new Menu();
-            menu.MenuName=menuViewModel.MenuName;
+            menu.MenuName = menuViewModel.MenuName;
             menu.Price = menuViewModel.Price;
             menu.Description = menuViewModel.Description;
 
@@ -71,8 +71,8 @@ namespace HamburgerAppMVC.Controllers
         [HttpPost]
         public IActionResult Delete(Menu menu)
         {
-            if (menu.PictureName!= null)
-                ResimSil(menu); 
+            if (menu.PictureName != null)
+                ResimSil(menu);
 
             _db.Menus.Remove(menu);
             _db.SaveChanges();

@@ -1,0 +1,56 @@
+﻿@model Category
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Kategori Ekle";
+}
+
+@if (ViewBag.Hata != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show mt-3 text-left custom-alert" style="background-color:rgb(255, 130, 130);" role="alert">
+        <strong>Hata!</strong> @ViewBag.Hata
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<section class="content ml-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-primary mt-5">
+                    <div class="card-header">
+                        <h3 class="card-title">Kategori Ekle</h3>
+                    </div>
+                    <form asp-action="Edit" method="post">
+                        <div class="card-body">                            
+                            <div class="form-group">
+                                <label asp-for="CategoryName"> @Html.DisplayNameFor(model => model.CategoryName)</label>
+                                <input asp-for="CategoryName" class="form-control form-control-lg" type="text" placeholder="Kategori Adını Giriniz" >
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-success">Ekle</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<style>
+    .custom-alert {
+        background-color: rgba(248, 215, 218, 0.7); /* Alert'in rengini soluk yapar */
+        border-color: rgba(245, 198, 203, 0.7); /* Kenar rengini soluk yapar */
+    }
+</style>
+
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+}

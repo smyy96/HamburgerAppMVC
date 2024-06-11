@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HamburgerAppMVC.Areas.Identity.Data.Entities.Concrete.Category>
+﻿@model IEnumerable<Category>
 @{
     Layout = "_AdminLayout";
     ViewData["Title"] = "Kategori";
@@ -21,7 +21,7 @@
                             <div class="input-group input-group-sm" style="width: 150px;">
 
                                 <div class="input-group-append">
-                                    <a class="btn btn-success btn-sm" href="#">
+                                    <a class="btn btn-success btn-sm" asp-action="Create">
                                         <i class="fas fa-plus mr-1">
                                         </i>
                                         Yeni Kategori Ekle
@@ -71,7 +71,7 @@
                                                     </i>
                                                     Detay
                                                 </a>
-                                                <a class="btn btn-info btn-sm ml-1" href="#">
+                                                <a class="btn btn-info btn-sm ml-1" asp-controller="Category" asp-action="Edit" asp-route-id="@item.Id">
                                                     <i class="fas fa-pencil-alt mr-1">
                                                     </i>
                                                     Düzenle
@@ -121,7 +121,7 @@
                                                     ...
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" id="ModalClose_@item.Id" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-secondary" id="ModalClose_@item.Id" data-dismiss="modal">Kapat</button>
                                                 </div>
                                             </div>
                                         </div>

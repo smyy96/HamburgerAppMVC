@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using HamburgerAppMVC.Areas.Identity.Data;
+using Microsoft.Extensions.DependencyInjection;
 namespace HamburgerAppMVC
 {
     public class Program
@@ -8,6 +9,7 @@ namespace HamburgerAppMVC
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            
 
 
             var connectionString = builder.Configuration.GetConnectionString("AppDbConStr") ?? throw new InvalidOperationException("Connection string 'AppDbContextConnection' not found.");
@@ -16,7 +18,7 @@ namespace HamburgerAppMVC
 
 
 
-            builder.Services.AddSingleton<MailSenderConfirm>();//mail sender kullanýmý için 
+            builder.Services.AddSingleton<MailSenderConfirm>();//mail sender kullan?m? i?in 
 
 
 

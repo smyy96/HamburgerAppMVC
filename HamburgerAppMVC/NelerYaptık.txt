@@ -82,6 +82,19 @@ Yeni Menü Ekleme,Silme butonları test edildi çalışıyor. Tasarım kısmınd
 add-migration ve update database yapmayı unutmayın.
 
 
+
+
+
+-------- 11.06.2024 Hivda Karahan --------
+
+Ekstra Malzemelerin CRUD işlemleri yapıldı.
+
+CRUD işlemlerinin kodu Menu ve Kategori ile benzer durumda. 
+
+Şuan için submit etme kısmında hata alıyorum. 
+
+CRUD işlemlerin hepsinin kodu tam ve kontrol edildi, diğer commitleri almak için projeyi gite gönderiyorum, sizinkileri fetch edip hataların giderilmesi ve tasarım üzerinde çalışacağım.
+
 -------- 11.06.2024 Eyşan Tekinsoy --------
 
 
@@ -111,3 +124,5 @@ Category.cs dosyasında proplara [DisplayName("Kategori Adı")] özellikleri ekl
 
 
 Category detay kısmını ekledim. Detay için ayrı cshtml açmadım index.cshtml için de javascript dosyası ile yükleniyor detaylar
+
+

@@ -51,24 +51,56 @@ namespace HamburgerAppMVC.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            return View(await _context.Categories.FindAsync(id));
+        }
 
 
-        //[HttpPost]
-        //public async Task<IActionResult> Edit(int id, Category category)
-        //{
-        //    if (id != category.Id)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, Category category)
+        {
+            if (category.CategoryName is null || category.CategoryName == "")
+            {
+                ViewBag.Hata = "Kategori adı boş geçilemez.";
+            }
 
-        //    if (ModelState.IsValid)
-        //    {
+            if (ModelState.IsValid)
+            {
+                _context.Update(category);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(category);
+        }
 
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(category);
-        //}
 
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
+
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Category category)
+        {
+            if (category.CategoryName is null || category.CategoryName == "")
+            {
+                ViewBag.Hata = "Kategori adı boş geçilemez.";
+            }
+
+            if (ModelState.IsValid)
+            {
+                _context.Add(category);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(category);
+        }
 
     }
 }

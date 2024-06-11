@@ -166,6 +166,24 @@ namespace HamburgerAppMVC.Controllers
 
         }
 
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var menu = _db.Menus
+                .FirstOrDefault(m => m.Id == id);
+            if (menu == null)
+            {
+                return NotFound();
+            }
+
+            return View(menu);
+        }
+
+
         [HttpGet]
         public IActionResult ResimKaldir(int id)
         {

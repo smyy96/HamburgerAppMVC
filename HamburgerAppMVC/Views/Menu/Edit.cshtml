@@ -1,42 +1,81 @@
-﻿<h1>Menü Güncelleme</h1>
-@model MenuViewModel
+﻿@model MenuViewModel
 
 @{
-    if (TempData["Hata"] != null)
-    {
-        <div class="alert alert-danger">
-            @TempData["Hata"]
-        </div>
-
-    }
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Menü Güncelle";
 }
 
-<form asp-action="Edit" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label asp-for="MenuName"> </label>
-        <input asp-for="MenuName" class="form-control" />
+@if (ViewBag.Hata != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show mt-3 text-left custom-alert" style="background-color:rgb(255, 130, 130);" role="alert">
+        <strong>Hata!</strong> @ViewBag.Hata
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
-    <div class="form-group">
-        <label asp-for="Price"> </label>
-        <input asp-for="Price" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Description"> </label>
-        <input asp-for="Description" class="form-control" />
-    </div>
-    <input hidden asp-for="Picture" />
-    <div class="form-group">
-        @{
-            if (ViewBag.PictureName != null)
-            {
-                <label>Resim Adı: @ViewBag.PictureName</label>
-            }
-        }
-        <br />
-        <label asp-for="Picture"> Resim Seç:</label>
-        <input asp-for="Picture" type="file" class="form-control" />
-    </div>
-    <button class="btn btn-primary">GÜNCELLE</button>
+}
 
-</form>
+<section class="content ml-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-primary mt-5">
+                    <div class="card-header">
+                        <h3 class="card-title">Menü Güncelle</h3>
+                    </div>
+
+                    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="MenuName">Menü Ad:</label>
+                                <input asp-for="MenuName" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Price">Fiyat:</label>
+                                <input asp-for="Price" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description">Açıklama:</label>
+                                <input asp-for="Description" class="form-control" />
+                            </div>
+                            <input hidden asp-for="Picture" />
+                            <div class="form-group">
+                                @{
+                                    if (ViewBag.PictureName != null)
+                                    {
+                                        <label>Resim Adı: @ViewBag.PictureName</label>
+                                    }
+                                }
+                                <br />
+                                <label asp-for="Picture"> Resim Seç:</label>
+                                <input asp-for="Picture" type="file" class="form-control" />
+                            </div>
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-success">Güncelle</button>
+                            </div>
+                            </<div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<style>
+    .custom-alert {
+        background-color: rgba(248, 215, 218, 0.7); /* Alert'in rengini soluk yapar */
+        border-color: rgba(245, 198, 203, 0.7); /* Kenar rengini soluk yapar */
+    }
+</style>
+
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+}
 

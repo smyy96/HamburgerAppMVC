@@ -1,0 +1,11 @@
+﻿@model HamburgerAppMVC.Areas.Identity.Data.Entities.Concrete.Menu
+
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title text-dark">@Model.MenuName</h3></br>
+        <h3 class="card-title text-dark">@Model.Price</h3></br>
+        <h3 class="card-title text-dark">@Model.Description</h3></br>
+        <h3 class="card-title text-dark">@Model.PictureName</h3></br>
+        <p class="card-text"><strong>Durum:</strong> <span class="badge @(Model.IsActive ? "badge-success" : "badge-danger")">@((Model.IsActive ? "Aktif" : "Pasif"))</span></p></br>
+    </div>
+</div>

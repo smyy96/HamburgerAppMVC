@@ -1,48 +1,76 @@
-﻿@model HamburgerAppMVC.Areas.Identity.Data.Entities.Concrete.Menu;
+﻿@model Menu;
 @{
-    ViewData["Title"] = "Create";
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Menü Ekle";
 }
 
-<h1>Create</h1>
-
-<h4>Menü</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post" enctype="multipart/form-data" asp-action="Create">
-            <div class="form-group">
-                <label asp-for="MenuName" class="control-label"></label>
-                <input asp-for="MenuName" class="form-control" />
-                <span asp-validation-for="MenuName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PictureName" class="control-label"></label>
-                <input type="file" name="picture" class="form-control" />
-                <span asp-validation-for="PictureName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+@if (ViewBag.Hata != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show mt-3 text-left custom-alert" style="background-color:rgb(255, 130, 130);" role="alert">
+        <strong>Hata!</strong> @ViewBag.Hata
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
-</div>
+}
 
+<h1>Menü Ekleme</h1>
+
+<section class="content ml-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-primary mt-5">
+                    <div class="card-header">
+                        <h3 class="card-title">Menü Ekle</h3>
+                    </div>
+
+                    <form method="post" enctype="multipart/form-data" asp-action="Create">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="MenuName" class="control-label">Menü Ad:</label>
+                                <input asp-for="MenuName" class="form-control" />
+                                <span asp-validation-for="MenuName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Price" class="control-label">Fiyat:</label>
+                                <input asp-for="Price" class="form-control" />
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label">Açıklama:</label>
+                                <input asp-for="Description" class="form-control" />
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="PictureName" class="control-label">Resim Seç:</label>
+                                <input type="file" name="picture" class="form-control" />
+                                <span asp-validation-for="PictureName" class="text-danger"></span>
+                            </div>
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-success">Ekle</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+<style>
+    .custom-alert {
+        background-color: rgba(248, 215, 218, 0.7); /* Alert'in rengini soluk yapar */
+        border-color: rgba(245, 198, 203, 0.7); /* Kenar rengini soluk yapar */
     }
+</style>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 }

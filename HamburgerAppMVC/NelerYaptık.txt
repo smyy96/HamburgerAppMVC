@@ -105,9 +105,9 @@ Menu CRUD işlemlerinde detay butonunun kodları geliştirildi.
 
 Güncelleme butonunda Development Mode ile ilgili hata mevcuttu. View daki kodlarda düzenleme yapılmasının ardından sorun düzeldi. 
 
-
 Controller üzerinde Crud İşlemleri gerçekleştirildi.
 
+Detay ve Delete lere ait cshtml ler sistemden kaldırıldı. Index sayfası üzerinden yüklenmesi sağlandı. 
 
 
 

@@ -72,3 +72,20 @@ Menü, Kategoriler ve Ekstra Lezetlerin CRUD işlemleri ve tasarımlarına geçe
 Menu Controller sisteme eklendi
 
 Controller üzerinde Crud İşlemleri gerçekleştirildi.
+
+
+
+
+
+------------ 11.06.2024 Sümeyye Coşkun ------------
+
+category controller oluşturuldu.
+
+_AdminLayout kısmına kategori butonunun linki eklendi
+
+Category index sayfası tasarlandı. Şuan sadece listeleme yapıyor.
+
+Category.cs dosyasında proplara [DisplayName("Kategori Adı")] özellikleri eklendi.
+
+
+Category detay kısmını ekledim. Detay için ayrı cshtml açmadım index.cshtml için de javascript dosyası ile yükleniyor detaylar

@@ -95,10 +95,13 @@ CRUD işlemlerinin kodu Menu ve Kategori ile benzer durumda.
 
 CRUD işlemlerin hepsinin kodu tam ve kontrol edildi, diğer commitleri almak için projeyi gite gönderiyorum, sizinkileri fetch edip hataların giderilmesi ve tasarım üzerinde çalışacağım.
 
+
+
 -------- 11.06.2024 Eyşan Tekinsoy --------
 
 
 AppSetting.Development alanı içerisinde  AppDbConStr satırı çoklatılarak kendi bilgisayarım için satır oluşturdum. 
+
 Çalışırken kendi server adınızın commentini açmayı unutmayın.
 
 Menu CRUD işlemlerinde detay butonunun kodları geliştirildi.
@@ -124,5 +127,14 @@ Category.cs dosyasında proplara [DisplayName("Kategori Adı")] özellikleri ekl
 
 
 Category detay kısmını ekledim. Detay için ayrı cshtml açmadım index.cshtml için de javascript dosyası ile yükleniyor detaylar
+
+Category Crud bitti.
+
+Login sayfasının tasarımı yapıldı ve menu indexe yönlendirildi.
+
+admin paneli cıkıs yap butonu eklendi.
+
+kullanıcı kayıt ol sayfası tasarlandı.
+
 
 

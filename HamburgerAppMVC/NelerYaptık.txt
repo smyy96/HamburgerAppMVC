@@ -137,4 +137,14 @@ admin paneli cıkıs yap butonu eklendi.
 kullanıcı kayıt ol sayfası tasarlandı.
 
 
+-------- 12.06.2024 Eyşan Tekinsoy --------
+
+Ortak kararlaştırılan Kullanıcı arayüzü sisteme dahil edildi.
+
+Bu arayüz tasarıma ait dosyalar wwwroot klasörü içerisinde UserTema dosyasına eklendi. 
+
+Kullanıcının bu ekranları görebilmesi için UserPageController açıldı. Index view'ıne menü kod bloğu eklendi. 
+
+_UserLayout daki menü alanı render edildi. Diğer alanlar ise Partial viewlere bölünerek dahil edildi. 
+
 

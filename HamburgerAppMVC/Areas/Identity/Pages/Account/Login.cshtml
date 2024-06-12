@@ -51,54 +51,58 @@
             </form>
         </section>
     </div> *@
-<div class="card card-outline card-primary">
-    <div class="card-header text-center">
-        <a  class="h1"><b>Giriş</b></a>
-    </div>
-    <div class="card-body">
-        <p class="login-box-msg">Oturumunuzu açmak için giriş yapınız.</p>
 
-        <form id="account" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="input-group mb-3">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="Email" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-envelope"></span>
+
+<div class="login-box">
+    <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+            <a class="h1"><b>Giriş</b></a>
+        </div>
+        <div class="card-body">
+            <p class="login-box-msg">Oturumunuzu açmak için giriş yapınız.</p>
+
+            <form id="account" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="input-group mb-3">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="Email" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="input-group mb-3">
-                <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Sifre" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-lock"></span>
+                <div class="input-group mb-3">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Sifre" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-8">
-                    <div class="icheck-primary">
-                        <input type="checkbox" id="remember">
-                        <label for="remember">
-                            Beni Hatırla!
-                        </label>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="icheck-primary">
+                            <input type="checkbox" id="remember">
+                            <label for="remember">
+                                Beni Hatırla!
+                            </label>
+                        </div>
                     </div>
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button id="login-submit" type="submit" class="btn btn-primary btn-block">Giriş Yap</button>
+                    </div>
+                    <!-- /.col -->
                 </div>
-                <!-- /.col -->
-                <div class="col-4">
-                    <button id="login-submit" type="submit" class="btn btn-primary btn-block">Giriş Yap</button>
-                </div>
-                <!-- /.col -->
-            </div>
-        </form>
-        <p>
-            <a class="text-center" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Yeni kayıt oluştur.</a>
-        </p>
+            </form>
+            <p>
+                <a class="text-center" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Yeni kayıt oluştur.</a>
+            </p>
+        </div>
+        <!-- /.card-body -->
     </div>
-    <!-- /.card-body -->
 </div>
 
 @section Scripts {

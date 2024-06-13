@@ -398,8 +398,6 @@ namespace HamburgerAppMVC.Migrations
                             Id = "66A51954-D206-4000-9F81-F73FE061B52D",
                             AccessFailedCount = 0,
 
-                            ConcurrencyStamp = "f05d9502-7e61-4624-942f-3268a71ed10b",
-
                             ConcurrencyStamp = "645469f3-8e32-4ce1-a0ec-2f99c2393599",
 
                             Email = "kullanici@gmail.com",
@@ -410,9 +408,6 @@ namespace HamburgerAppMVC.Migrations
                             NormalizedUserName = "KULLANICI@GMAIL.COM",
                             PasswordHash = "AQAAAAIAAYagAAAAEPxaUcQBXHjUxxAfHVSITSYFV7tkSgf4S1YEeppkOo0al0WcB7QNhp7YKFJzZMTN+Q==",
                             PhoneNumberConfirmed = false,
-
-                            SecurityStamp = "c934ce3b-e622-4205-925e-ab71f3fa61da",
-
                             SecurityStamp = "17cca19e-3e4c-4e27-bf91-b6972db0a62a",
 
                             Surname = "Kullanici Surname",
@@ -424,8 +419,6 @@ namespace HamburgerAppMVC.Migrations
                             Id = "031A45EF-18ED-4BBC-80E5-D0E6FE65908C",
                             AccessFailedCount = 0,
 
-                            ConcurrencyStamp = "ffe4fb31-596b-470e-8cc3-ef13846cfeb2",
-
                             ConcurrencyStamp = "9ea54aea-5071-4de7-9ff7-142a27a3764a",
 
                             Email = "admin@gmail.com",
@@ -436,8 +429,6 @@ namespace HamburgerAppMVC.Migrations
                             NormalizedUserName = "ADMIN@GMAIL.COM",
                             PasswordHash = "AQAAAAIAAYagAAAAEPxaUcQBXHjUxxAfHVSITSYFV7tkSgf4S1YEeppkOo0al0WcB7QNhp7YKFJzZMTN+Q==",
                             PhoneNumberConfirmed = false,
-
-                            SecurityStamp = "2422a853-e33d-44e0-929f-8b1b0ec64fe6",
 
                             SecurityStamp = "613de9ce-57e3-43fe-af79-39a65714a5d5",
 

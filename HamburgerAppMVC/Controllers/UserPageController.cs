@@ -8,7 +8,8 @@ namespace HamburgerAppMVC.Controllers
     {
         private readonly AppDbContext _context;
 
-        public static List<Menu> Menus;
+        public static List<Menu> MenuBasletList = new List<Menu>();
+        public static List<ExtraMaterial> ExtraMaterialBasletList = new List<ExtraMaterial>();
 
         public UserPageController(AppDbContext context)
         {
@@ -31,7 +32,23 @@ namespace HamburgerAppMVC.Controllers
 
         public IActionResult TemporaryBasketMenu(int id)
         {
-            return Json(new { success = true, message = "Ürün sepete eklendi!" });
+
+            var menu = _context.Menus.Find(id);
+
+            MenuBasletList.Add(menu);
+
+            return Json(new { success = true, message = $"{menu.MenuName} başarıyla sepetinize eklendi." });
+        }
+
+
+        public IActionResult TemporaryBasketExtraMaterial(int id)
+        {
+
+            var extMaterial = _context.ExtraMaterials.Find(id);
+
+            ExtraMaterialBasletList.Add(extMaterial);
+
+            return Json(new { success = true, message = $"{extMaterial.ExtraMaterialName} başarıyla sepetinize eklendi." });
         }
     }
 }

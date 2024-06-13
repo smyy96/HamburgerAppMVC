@@ -60,7 +60,14 @@
                                 <p class="price m-0" style="flex: 1; text-align: center;">
                                     ₺@item.Price
                                 </p>
-                                <button class="btn btn-outline-danger add-to-cart" data-id="@item.Id" style="flex-shrink: 0;"><i class="bi bi-basket-fill"></i></button>
+                                @if (ViewBag.LoginControl != null)
+                                {
+                                    <button class="btn btn-outline-danger add-to-cart" data-id="@item.Id" style="flex-shrink: 0;"><i class="bi bi-basket-fill"></i></button>
+                                }
+                                else
+                                {
+                                    <button id="login" asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-danger" style="flex-shrink: 0;"><i class="bi bi-basket-fill"></i></button>
+                                }
                             </div>
 
                         </div>
@@ -71,7 +78,7 @@
 
 
 
-            @* kategorilerine göre extramalzemelerin yüklenildiği kısım *@
+            @* kategorilerine göre extra malzemelerin yüklenildiği kısım *@
             @foreach (var item in ViewBag.Categories)
             {
                 <div class="tab-pane fade" id="menu-@item.CategoryName.ToLower().Replace(" ", "-")">
@@ -94,7 +101,16 @@
                                         <p class="price m-0" style="flex: 1; text-align: center;">
                                             ₺@itemEx.Price
                                         </p>
-                                        <button class="btn btn-outline-danger add-to-cartEx" data-id="@itemEx.Id" style="flex-shrink: 0;"><i class="bi bi-basket-fill"></i></button>
+
+                                        @if (ViewBag.LoginControl != null)
+                                        {
+                                            <button class="btn btn-outline-danger add-to-cartEx" data-id="@itemEx.Id" style="flex-shrink: 0;"><i class="bi bi-basket-fill"></i></button>
+                                        }
+                                        else
+                                        {
+                                            <button id="login" asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-danger" data-id="@itemEx.Id" style="flex-shrink: 0;"><i class="bi bi-basket-fill"></i></button>
+                                        }
+
                                     </div>
                                 </div>
                             }
@@ -134,7 +150,7 @@
 
 
 
-@section Scripts{
+@section Scripts {
     <script>
         //Burada secilen menu kaydedilmesi için actiona yönlendiriliyor.
         $(document).ready(function () {

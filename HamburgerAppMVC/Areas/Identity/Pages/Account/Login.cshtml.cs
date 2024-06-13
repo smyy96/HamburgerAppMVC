@@ -141,7 +141,7 @@ namespace HamburgerAppMVC.Areas.Identity.Pages.Account
                         }
                         else if (roles.Contains("User"))
                         {
-                            return LocalRedirect(Url.Content("~/Home/Index"));
+                            return LocalRedirect(Url.Content("~/UserPage/Index"));
                         }
                     }// kod aralıgı bu kadar SC
 

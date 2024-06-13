@@ -85,8 +85,6 @@ namespace HamburgerAppMVC.Controllers
         }
 
 
-
-
         [HttpPost]
         public async Task<IActionResult> Create(Category category)
         {

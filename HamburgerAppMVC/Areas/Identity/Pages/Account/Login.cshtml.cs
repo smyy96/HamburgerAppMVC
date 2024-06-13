@@ -137,7 +137,7 @@ namespace HamburgerAppMVC.Areas.Identity.Pages.Account
 
                         if (roles.Contains("Admin"))
                         {
-                            return LocalRedirect(Url.Content("~/Home/Privacy"));
+                            return LocalRedirect(Url.Content("~/Menu/Index"));
                         }
                         else if (roles.Contains("User"))
                         {

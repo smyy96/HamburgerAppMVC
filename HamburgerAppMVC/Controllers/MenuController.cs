@@ -61,22 +61,37 @@ namespace HamburgerAppMVC.Controllers
             return RedirectToAction("Index");
         }
 
-        //Silme 
-        [HttpGet]
-        public IActionResult Delete(int id)
-        {
+        ////Silme 
+        //[HttpGet]
+        //public IActionResult Delete(int id)
+        //{
 
-            return View(_db.Menus.Find(id));
-        }
+        //    return View(_db.Menus.Find(id));
+        //}
+        //[HttpPost]
+        //public IActionResult Delete(Menu menu)
+        //{
+        //    if (menu.PictureName != null)
+        //        ResimSil(menu);
+
+        //    _db.Menus.Remove(menu);
+        //    _db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
+
         [HttpPost]
-        public IActionResult Delete(Menu menu)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (menu.PictureName != null)
-                ResimSil(menu);
 
-            _db.Menus.Remove(menu);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
+            var menu = await _db.Menus
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+
+            menu.IsActive = false;
+            _db.Update(menu);
+            await _db.SaveChangesAsync();
+
+            return Json(new { success = true });
         }
 
         //Güncelleme
@@ -166,21 +181,34 @@ namespace HamburgerAppMVC.Controllers
 
         }
 
-        public IActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //public IActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var menu = _db.Menus
-                .FirstOrDefault(m => m.Id == id);
+        //    var menu = _db.Menus
+        //        .FirstOrDefault(m => m.Id == id);
+        //    if (menu == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(menu);
+        //}
+
+        public async Task<IActionResult> Details(int id)
+        {
+
+            var menu = await _db.Menus
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (menu == null)
             {
                 return NotFound();
             }
 
-            return View(menu);
+            return PartialView("_MenuDetailsPartial", menu);
         }
 
 

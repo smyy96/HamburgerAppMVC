@@ -36,8 +36,8 @@ namespace HamburgerAppMVC.Controllers
                 TempData["Hata"] = "Fiyat negatif olamaz";
                 return View();
             }
-            
-            if(extraMaterialViewModel.Image == null || extraMaterialViewModel.Image.Length == 0)
+
+            if (extraMaterialViewModel.Image == null || extraMaterialViewModel.Image.Length == 0)
             {
                 TempData["Hata"] = "Lütfen bir resim yükleyiniz";
                 return View();
@@ -49,9 +49,9 @@ namespace HamburgerAppMVC.Controllers
 
             if(extraMaterialViewModel.Image != null)
             {
-                extraMaterial.Picture = extraMaterialViewModel.Image.FileName;
+                extraMaterial.PictureName = extraMaterialViewModel.Image.FileName;
 
-                var dosyaKonumu = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", extraMaterial.Picture);
+                var dosyaKonumu = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", extraMaterial.PictureName);
                 var fileStream = new FileStream(dosyaKonumu, FileMode.Create);
                 extraMaterialViewModel.Image.CopyTo(fileStream);
                 fileStream.Close(); 
@@ -73,7 +73,7 @@ namespace HamburgerAppMVC.Controllers
         [HttpPost]
         public IActionResult Delete(ExtraMaterial extraMaterial)
         {
-            if (extraMaterial.Picture != null)
+            if (extraMaterial.PictureName != null)
             {
                 ResimSil(extraMaterial);
             }
@@ -87,11 +87,11 @@ namespace HamburgerAppMVC.Controllers
 
         public void ResimSil(ExtraMaterial extraMaterial)
         {
-            var resmiKullananVarMi = _db.ExtraMaterials.Any(u => u.Picture == extraMaterial.Picture && u.Id != extraMaterial.Id);
+            var resmiKullananVarMi = _db.ExtraMaterials.Any(u => u.PictureName == extraMaterial.PictureName && u.Id != extraMaterial.Id);
 
             if (!resmiKullananVarMi)
             {
-                string silinecekResim = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", extraMaterial.Picture);
+                string silinecekResim = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", extraMaterial.PictureName);
                 System.IO.File.Delete(silinecekResim);
             }
         }
@@ -108,7 +108,7 @@ namespace HamburgerAppMVC.Controllers
             extraMaterialViewModel.Name = guncellenecekUrun.ExtraMaterialName;
             extraMaterialViewModel.Price = guncellenecekUrun.Price;
 
-            ViewBag.Picture = guncellenecekUrun.Picture;
+            ViewBag.Picture = guncellenecekUrun.PictureName;
             TempData["Id"] = id;
 
             return View(extraMaterialViewModel);
@@ -127,8 +127,8 @@ namespace HamburgerAppMVC.Controllers
 
             guncellenenUrun.ExtraMaterialName = extraMaterialViewModel.Name;
             guncellenenUrun.Price = extraMaterialViewModel.Price;
-            guncellenenUrun.Picture = extraMaterialViewModel.Image.FileName; //Resim koymayı yukarıda zorunlu hale getirdiğimden if koşulu koymadım
-            var dosyaKonumu = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", guncellenenUrun.Picture);
+            guncellenenUrun.PictureName = extraMaterialViewModel.Image.FileName; //Resim koymayı yukarıda zorunlu hale getirdiğimden if koşulu koymadım
+            var dosyaKonumu = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", guncellenenUrun.PictureName);
 
             _db.ExtraMaterials.Update(guncellenenUrun);
             _db.SaveChanges();

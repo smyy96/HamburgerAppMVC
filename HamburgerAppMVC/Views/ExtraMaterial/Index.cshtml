@@ -34,7 +34,7 @@
                                     <th> @Html.DisplayNameFor(model => model.Id)</th>
                                     <th> @Html.DisplayNameFor(model => model.ExtraMaterialName)</th>
                                     <th> @Html.DisplayNameFor(model => model.Price)</th>                                 
-                                    <th> @Html.DisplayNameFor(model => model.Picture)</th>
+                                    <th> @Html.DisplayNameFor(model => model.PictureName)</th>
                                     <th> @Html.DisplayNameFor(model => model.IsActive)</th>
                                     <th></th>
                                 </tr>
@@ -48,7 +48,7 @@
                                         <td>@item.Id</td>
                                         <td>@item.ExtraMaterialName</td>
                                         <td>@item.Price</td>
-                                        <td> <img height="60px" width="60px" src="~/Images/@item.Picture" alt="Resim Yok" /> </td>
+                                        <td> <img height="60px" width="60px" src="~/Images/@item.PictureName" alt="Resim Yok" /> </td>
                                         <td>
 
                                             @if (item.IsActive == true)

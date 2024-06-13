@@ -12,7 +12,7 @@ namespace HamburgerAppMVC.Areas.Identity.Data.Entities.Concrete
         public double Price { get; set; }
 
         [DisplayName("Resim")]
-        public string Picture { get; set; }
+        public string PictureName { get; set; }
 
 
         [DisplayName("Kategori Adı")]

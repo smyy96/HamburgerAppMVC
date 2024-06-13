@@ -169,3 +169,27 @@ UserPageControllerın Index sayfasına ürünlerin nasıl listelendiği eklendi.
 satın al butonuna tıklayınca başka bir action yönlendiriliyor ve listeye ürünler kaydediliyor.
 
 login kısmını userpage ekledim kullanıcı giriş cıkıs işlemlerini yapabiliyor oturum açmayan kullanıcılar satın alma işlemi yapamıyor.
+
+
+
+------------ 13.06.2024 Hivda Karahan ------------
+
+Ekstra malzemeler create için hataları gidermeye çalıştım.
+
+Yeni ekstra lezzet ekle kısmına kategoriyi comboboxolarak ekledim.
+
+Detay, düzenle ve create kısmında dosya yükleme hataları var, onları gidermeye uğraşıyorum.
+
+
+
+
+------------ 13.06.2024 Hivda Karahan ------------
+
+ExtraMaterial için create kısmındaki hataların tümü giderildi.
+
+Detay, düzenle ve sil kısımlarındaki hatalar da giderildi.
+
+Tasarımlar yapıldı.
+
+
+

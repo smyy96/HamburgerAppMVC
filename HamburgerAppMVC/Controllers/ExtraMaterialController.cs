@@ -107,7 +107,7 @@ namespace HamburgerAppMVC.Controllers
             extraMaterialViewModel.ExtraMaterialName = guncellenecekUrun.ExtraMaterialName;
             extraMaterialViewModel.Price = guncellenecekUrun.Price;
 
-            ViewBag.Picture = guncellenecekUrun.PictureName;
+            //ViewBag.Picture = guncellenecekUrun.PictureName;
             TempData["Id"] = id;
 
             return View(extraMaterialViewModel);

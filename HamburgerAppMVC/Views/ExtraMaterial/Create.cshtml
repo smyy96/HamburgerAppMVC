@@ -1,45 +1,76 @@
 ﻿@model ExtraMaterialViewModel;
 @{
-    ViewData["Title"] = "Create";
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Ekstra Lezzet Ekle";
 }
 
-<h1>Create</h1>
-
-<h4>Ekstra Lezzetler</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label asp-for="ExtraMaterialName" class="control-label"></label>
-                <input asp-for="ExtraMaterialName" class="form-control" />
-                <span asp-validation-for="ExtraMaterialName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CategoryId" class="control-label">Kategori</label>
-                <select asp-for="CategoryId" class="form-control" asp-items="@(ViewBag.Category = new SelectList(ViewBag.Category, "Id", "CategoryName"))">
-                    <option>Kategori Seç</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Image" class="control-label"></label>
-                <input type="file" name="picture" class="form-control" />
-                <span asp-validation-for="Image" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+@if (TempData["Hata"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show mt-3 text-left custom-alert" style="background-color:rgb(255, 130, 130);" role="alert">
+        <strong>Hata!</strong> @TempData["Hata"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
-</div>
+}
+
+<section class="content ml-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-primary mt-5">
+                    <div class="card-header">
+                        <h3 class="card-title">Ekstra Lezzet Ekle</h3>
+                    </div>
+
+                    <form method="post" enctype="multipart/form-data" asp-action="Create">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="ExtraMaterialName" class="control-label">Lezzet Adı:</label>
+                                <input asp-for="ExtraMaterialName" class="form-control" />
+                                <span asp-validation-for="ExtraMaterialName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Price" class="control-label">Fiyat:</label>
+                                <input asp-for="Price" class="form-control" />
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CategoryId" class="control-label">Kategori:</label>
+                                <select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(ViewBag.Category, "Id", "CategoryName"))">
+                                    <option>Kategori Seç</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Image" class="control-label">Resim Seç:</label>
+                                <input type="file" asp-for="Image" class="form-control" />
+                                <span asp-validation-for="Image" class="text-danger"></span>
+                            </div>
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-success">Ekle</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
+<style>
+    .custom-alert {
+        background-color: rgba(248, 215, 218, 0.7); /* Alert'in rengini soluk yapar */
+        border-color: rgba(245, 198, 203, 0.7); /* Kenar rengini soluk yapar */
+    }
+</style>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+}

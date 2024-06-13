@@ -138,3 +138,10 @@ kullanıcı kayıt ol sayfası tasarlandı.
 
 
 
+
+
+------------ 12.06.2024 Sümeyye Coşkun ------------
+
+UserPageController da index sayfası hazırlandı.
+ 
+Index sayfası menuler ve extra malzeme bilgileri ile dolu şekilde geliyor.

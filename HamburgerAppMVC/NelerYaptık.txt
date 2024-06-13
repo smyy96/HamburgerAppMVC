@@ -165,4 +165,7 @@ ExtraMal için seed data ekledim UPDATE DATABASE yapmayı unutmayın.
 Menu ve Ekstra Mal. düzenlendi. 
 
 UserPageControllerın Index sayfasına ürünlerin nasıl listelendiği eklendi. 
+
 satın al butonuna tıklayınca başka bir action yönlendiriliyor ve listeye ürünler kaydediliyor.
+
+login kısmını userpage ekledim kullanıcı giriş cıkıs işlemlerini yapabiliyor oturum açmayan kullanıcılar satın alma işlemi yapamıyor.

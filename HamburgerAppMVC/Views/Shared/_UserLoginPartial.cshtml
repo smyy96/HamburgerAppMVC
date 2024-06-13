@@ -14,7 +14,7 @@
 
         <li class="nav-item">
             @* <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"> *@
-            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout">
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/UserPage/Index" method="post">
                 <button id="logout" type="submit" class="btn btn-outline-danger" style="border-radius: 50%;
                         border: 1px solid #ce1212;
                         width: 35px;

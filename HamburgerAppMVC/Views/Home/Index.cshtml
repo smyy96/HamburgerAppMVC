@@ -1,8 +1,98 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model List<Menu>
+
+@{
+    Layout = "_UserLayout";
+
+    var categories = ViewBag.Categories as List<Category>;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>burada menuler gözükecek ama sadece resimleri login olduktan sonra satın alma butonu olan resimler yüklenecek</p>
-</div>
+
+<section id="menu" class="menu section">
+
+
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Menülerimiz</h2>
+        <p><span>Check Our</span> <span class="description-title">Yummy Menu</span></p>
+    </div>
+
+    <div class="container">
+
+        <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+
+            <li class="nav-item">
+                <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#menu-starters">
+                    <h4>Tümünü Görüntüle</h4>
+                </a>
+            </li>
+            @foreach (var item in ViewBag.Categories)
+            {
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-@item.CategoryName.ToLower().Replace(" ", "-")">
+                        <h4>@item.CategoryName</h4>
+                    </a>
+                </li>
+            }
+        </ul>
+
+
+        @* Bütün menülerin yüklendiği yer *@
+        <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
+
+            <div class="tab-pane fade active show" id="menu-starters">
+
+                <div class="tab-header text-center">
+                    <p>Menu</p>
+                    <h3>Bütün Menü</h3>
+                </div>
+
+                <div class="row gy-5">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-4 menu-item">
+                            <img src="~/Images/@item.PictureName" class="menu-img img-fluid" alt="@item.MenuName" />
+                            <h4>@item.MenuName</h4>
+                            <p class="ingredients">
+                                @item.Description
+                            </p>
+                            <p class="price">
+                                ₺@item.Price
+                            </p>
+                        </div>
+                    }
+                </div>
+            </div>
+
+
+
+            @* kategorilerine göre extra malzemelerin yüklenildiği kısım *@
+            @foreach (var item in ViewBag.Categories)
+            {
+                <div class="tab-pane fade" id="menu-@item.CategoryName.ToLower().Replace(" ", "-")">
+
+                    <div class="tab-header text-center">
+                        <p>Menu</p>
+                        <h3>@item.CategoryName</h3>
+                    </div>
+
+                    <div class="row gy-5">
+                        @foreach (var itemEx in ViewBag.ExtraM)
+                        {
+                            if (itemEx.CategoryId == item.Id)
+                            {
+                                <div class="col-lg-4 menu-item">
+                                    <img src="~/Images/@itemEx.PictureName" class="menu-img img-fluid" alt="@itemEx.ExtraMaterialName">
+                                    <h4>@itemEx.ExtraMaterialName</h4>
+                                    <p class="price">
+                                        ₺@itemEx.Price
+                                    </p>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+
+</section>

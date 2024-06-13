@@ -9,7 +9,7 @@ namespace HamburgerAppMVC
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            
+
 
 
             var connectionString = builder.Configuration.GetConnectionString("AppDbConStr") ?? throw new InvalidOperationException("Connection string 'AppDbContextConnection' not found.");
@@ -42,8 +42,6 @@ namespace HamburgerAppMVC
             }
 
             app.UseHttpsRedirection();
-
-            //Selam :)
 
             app.UseStaticFiles();
 

@@ -2,7 +2,7 @@
 {
     public class ExtraMaterialViewModel
     {
-        public string Name { get; set; }
+        public string ExtraMaterialName { get; set; }
         public double Price { get; set; }
         public IFormFile Image { get; set; }
 

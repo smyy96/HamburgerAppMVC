@@ -26,7 +26,6 @@ namespace HamburgerAppMVC.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ExtraMaterialViewModel extraMaterialViewModel)
         {
             if (!ModelState.IsValid)
@@ -37,7 +36,7 @@ namespace HamburgerAppMVC.Controllers
 
             ExtraMaterial extraMaterial = new ExtraMaterial
             {
-                ExtraMaterialName = extraMaterialViewModel.Name,
+                ExtraMaterialName = extraMaterialViewModel.ExtraMaterialName,
                 Price = extraMaterialViewModel.Price,
                 CategoryId = extraMaterialViewModel.CategoryId
             };
@@ -105,7 +104,7 @@ namespace HamburgerAppMVC.Controllers
             var guncellenecekUrun = _db.ExtraMaterials.Find(id);
 
             ExtraMaterialViewModel extraMaterialViewModel = new ExtraMaterialViewModel();
-            extraMaterialViewModel.Name = guncellenecekUrun.ExtraMaterialName;
+            extraMaterialViewModel.ExtraMaterialName = guncellenecekUrun.ExtraMaterialName;
             extraMaterialViewModel.Price = guncellenecekUrun.Price;
 
             ViewBag.Picture = guncellenecekUrun.PictureName;
@@ -125,7 +124,7 @@ namespace HamburgerAppMVC.Controllers
 
             var guncellenenUrun = _db.ExtraMaterials.Find(TempData["Id"]);
 
-            guncellenenUrun.ExtraMaterialName = extraMaterialViewModel.Name;
+            guncellenenUrun.ExtraMaterialName = extraMaterialViewModel.ExtraMaterialName;
             guncellenenUrun.Price = extraMaterialViewModel.Price;
             guncellenenUrun.PictureName = extraMaterialViewModel.Image.FileName; //Resim koymayı yukarıda zorunlu hale getirdiğimden if koşulu koymadım
             var dosyaKonumu = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", guncellenenUrun.PictureName);

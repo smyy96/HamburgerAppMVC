@@ -148,3 +148,21 @@ Kullanıcının bu ekranları görebilmesi için UserPageController açıldı. I
 _UserLayout daki menü alanı render edildi. Diğer alanlar ise Partial viewlere bölünerek dahil edildi. 
 
 
+
+
+------------ 12.06.2024 Sümeyye Coşkun ------------
+
+UserPageController da index sayfası hazırlandı.
+ 
+Index sayfası menuler ve extra malzeme bilgileri ile dolu şekilde geliyor.
+
+
+
+------------ 13.06.2024 Sümeyye Coşkun ------------
+
+ExtraMal için seed data ekledim UPDATE DATABASE yapmayı unutmayın.
+
+Menu ve Ekstra Mal. düzenlendi. 
+
+UserPageControllerın Index sayfasına ürünlerin nasıl listelendiği eklendi. 
+satın al butonuna tıklayınca başka bir action yönlendiriliyor ve listeye ürünler kaydediliyor.

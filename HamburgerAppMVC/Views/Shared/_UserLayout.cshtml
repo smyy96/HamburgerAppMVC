@@ -27,13 +27,6 @@
     <!-- Main CSS File -->
     <link href="~/UserTema/assets/css/main.css" rel="stylesheet">
 
-    <!-- =======================================================
-    * Template Name: Yummy
-    * Template URL: https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/
-    * Updated: Jun 06 2024 with Bootstrap v5.3.3
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
 </head>
 
 <body class="index-page">
@@ -119,8 +112,15 @@
     <script src="~/UserTema/assets/vendor/purecounter/purecounter_vanilla.js"></script>
     <script src="~/UserTema/assets/vendor/swiper/swiper-bundle.min.js"></script>
 
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
     <!-- Main JS File -->
     <script src="~/UserTema/assets/js/main.js"></script>
+
+
+    @await RenderSectionAsync("Scripts", required: false)
 
 </body>
 

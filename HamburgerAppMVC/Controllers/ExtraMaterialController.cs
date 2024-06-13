@@ -2,6 +2,7 @@
 using HamburgerAppMVC.Areas.Identity.Data.Entities.Concrete;
 using HamburgerAppMVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HamburgerAppMVC.Controllers
 {
@@ -16,50 +17,49 @@ namespace HamburgerAppMVC.Controllers
         }
 
 
-        public IActionResult Index()
-        {
-            return View(_db.ExtraMaterials.ToList());
-        }
-
-
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var categories = await _db.Categories.ToListAsync();
+            ViewBag.Category = categories;
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(ExtraMaterialViewModel extraMaterialViewModel)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(ExtraMaterialViewModel extraMaterialViewModel)
         {
-            if(extraMaterialViewModel.Price < 0)
+            if (!ModelState.IsValid)
             {
-                TempData["Hata"] = "Fiyat negatif olamaz";
-                return View();
+                ViewBag.Category = await _db.Categories.ToListAsync();
+                return View(extraMaterialViewModel);
             }
 
-            if (extraMaterialViewModel.Image == null || extraMaterialViewModel.Image.Length == 0)
+            ExtraMaterial extraMaterial = new ExtraMaterial
             {
-                TempData["Hata"] = "Lütfen bir resim yükleyiniz";
-                return View();
-            }
+                ExtraMaterialName = extraMaterialViewModel.Name,
+                Price = extraMaterialViewModel.Price,
+                CategoryId = extraMaterialViewModel.CategoryId
+            };
 
-            ExtraMaterial extraMaterial = new ExtraMaterial();
-            extraMaterial.ExtraMaterialName = extraMaterialViewModel.Name;
-            extraMaterial.Price = extraMaterialViewModel.Price;
-
-            if(extraMaterialViewModel.Image != null)
+            if (extraMaterialViewModel.Image != null && extraMaterialViewModel.Image.Length > 0)
             {
                 extraMaterial.PictureName = extraMaterialViewModel.Image.FileName;
-
                 var dosyaKonumu = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", extraMaterial.PictureName);
-                var fileStream = new FileStream(dosyaKonumu, FileMode.Create);
-                extraMaterialViewModel.Image.CopyTo(fileStream);
-                fileStream.Close(); 
-            }           
-            
+                using (var fileStream = new FileStream(dosyaKonumu, FileMode.Create))
+                {
+                    await extraMaterialViewModel.Image.CopyToAsync(fileStream);
+                }
+            }
+
             _db.ExtraMaterials.Add(extraMaterial);
-            _db.SaveChanges();
-            return RedirectToAction("Index");  
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Index()
+        {
+            return View(_db.ExtraMaterials.Include(e => e.Category).ToList());
         }
 
 

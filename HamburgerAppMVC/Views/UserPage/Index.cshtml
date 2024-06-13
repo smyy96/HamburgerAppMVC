@@ -60,7 +60,7 @@
                                 <p class="price m-0" style="flex: 1; text-align: center;">
                                     ₺@item.Price
                                 </p>
-                                <button class="btn btn-outline-danger" data-id="@item.Id" style="flex-shrink: 0;"><i class="bi bi-basket-fill"></i></button>
+                                <button class="btn btn-outline-danger add-to-cart" data-id="@item.Id" style="flex-shrink: 0;"><i class="bi bi-basket-fill"></i></button>
                             </div>
 
                         </div>
@@ -71,7 +71,7 @@
 
 
 
-            @* kategorilerine göre extramalzemelerin yüklendiği yer *@
+            @* kategorilerine göre extramalzemelerin yüklenildiği kısım *@
             @foreach (var item in ViewBag.Categories)
             {
                 <div class="tab-pane fade" id="menu-@item.CategoryName.ToLower().Replace(" ", "-")">
@@ -87,14 +87,14 @@
                             if (itemEx.CategoryId == item.Id)
                             {
                                 <div class="col-lg-4 menu-item">
-                                    <img src="~/Images/@itemEx.Picture" class="menu-img img-fluid" alt="@itemEx.ExtraMaterialName">
+                                    <img src="~/Images/@itemEx.PictureName" class="menu-img img-fluid" alt="@itemEx.ExtraMaterialName">
                                     <h4>@itemEx.ExtraMaterialName</h4>
 
                                     <div class="d-flex justify-content-between align-items-center">
                                         <p class="price m-0" style="flex: 1; text-align: center;">
                                             ₺@itemEx.Price
                                         </p>
-                                        <button class="btn btn-outline-danger" style="flex-shrink: 0;"><i class="bi bi-basket-fill"></i></button>
+                                        <button class="btn btn-outline-danger add-to-cartEx" data-id="@itemEx.Id" style="flex-shrink: 0;"><i class="bi bi-basket-fill"></i></button>
                                     </div>
                                 </div>
                             }
@@ -110,24 +110,77 @@
 
 
 
+
+
+<!-- Modal Ürün almak için butona tıklanıldıgı zaman ürün eklenilmiştir diye uyarı mesajı veren kısım-->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Ürün Sepete Eklendi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @* Mesaj buraya yükleniyor action'dan' *@
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 @section Scripts{
     <script>
+        //Burada secilen menu kaydedilmesi için actiona yönlendiriliyor.
         $(document).ready(function () {
             $(".add-to-cart").click(function () {
                 var productId = $(this).data("id");
-                var productName = $(this).data("name");
-                var productPrice = $(this).data("price");
 
                 $.ajax({
-                    url: '@Url.Action("AddToCart", "UserPage")',
+                    url: '@Url.Action("TemporaryBasketMenu", "UserPage")',
                     type: 'POST',
                     data: {
-                        id: productId,
-                        name: productName,
-                        price: productPrice
+                        id: productId
                     },
                     success: function (response) {
-                        alert("Ürün sepete eklendi!");
+                        if (response.success) {
+                            $('#successModal').modal('show'); // Success modalını göster
+                            $('#successModal .modal-body').text(response.message);
+                        } else {
+                            alert("Ürün sepete eklenirken bir hata oluştu.");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Bir hata oluştu: " + error);
+                    }
+                });
+            });
+
+
+
+            //Burada secilen Ekstra mal. kaydedilmesi için actiona yönlendiriliyor.
+
+            $(".add-to-cartEx").click(function () {
+                var productId = $(this).data("id");
+
+                $.ajax({
+                    url: '@Url.Action("TemporaryBasketExtraMaterial", "UserPage")',
+                    type: 'POST',
+                    data: {
+                        id: productId
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            $('#successModal').modal('show'); // Success modalını göster
+                            $('#successModal .modal-body').text(response.message); //Mesajı Modala yükle
+                        } else {
+                            alert("Ürün sepete eklenirken bir hata oluştu.");
+                        }
                     },
                     error: function (xhr, status, error) {
                         alert("Bir hata oluştu: " + error);

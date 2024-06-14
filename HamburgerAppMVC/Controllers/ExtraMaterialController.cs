@@ -1,11 +1,13 @@
 ﻿using HamburgerAppMVC.Areas.Identity.Data;
 using HamburgerAppMVC.Areas.Identity.Data.Entities.Concrete;
 using HamburgerAppMVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace HamburgerAppMVC.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ExtraMaterialController : Controller
     {
 

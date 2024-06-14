@@ -67,5 +67,11 @@ namespace HamburgerAppMVC.Controllers
 
             return Json(new { success = true, message = $"{extMaterial.ExtraMaterialName} başarıyla sepetinize eklendi." });
         }
+
+
+        public IActionResult Basket()
+        {
+            return View();  
+        }
     }
 }

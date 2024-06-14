@@ -22,7 +22,7 @@ namespace HamburgerAppMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var categories = await _db.Categories.ToListAsync();
+            var categories = await _db.Categories.Where(c => c.IsActive == true).ToListAsync();
             ViewBag.Category = categories;
             return View();
         }
@@ -118,7 +118,7 @@ namespace HamburgerAppMVC.Controllers
         [HttpPost]
         public IActionResult Edit(ExtraMaterialViewModel extraMaterialViewModel)
         {
-            if(extraMaterialViewModel.Price < 0)
+            if (extraMaterialViewModel.Price < 0)
             {
                 TempData["Hata"] = "Fiyat negatif olamaz";
                 return View();
@@ -133,7 +133,7 @@ namespace HamburgerAppMVC.Controllers
 
             _db.ExtraMaterials.Update(guncellenenUrun);
             _db.SaveChanges();
-            return RedirectToAction("Index");   
+            return RedirectToAction("Index");
         }
     }
 }

@@ -74,16 +74,29 @@ namespace HamburgerAppMVC.Controllers
         [HttpPost]
         public IActionResult Delete(ExtraMaterial extraMaterial)
         {
-            if (extraMaterial.PictureName != null)
+            
+            var silinecekUrun = _db.ExtraMaterials.Find(extraMaterial.Id);
+
+            if (silinecekUrun == null)
             {
-                ResimSil(extraMaterial);
+                return NotFound();
             }
 
-            extraMaterial.IsActive = false;
+            if (silinecekUrun.PictureName != null)
+            {
+                ResimSil(silinecekUrun);
+            }
+
+          
+            silinecekUrun.IsActive = false;
+
+         
+            _db.Entry(silinecekUrun).State = EntityState.Modified;
 
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+
 
 
         public void ResimSil(ExtraMaterial extraMaterial)
@@ -128,12 +141,48 @@ namespace HamburgerAppMVC.Controllers
 
             guncellenenUrun.ExtraMaterialName = extraMaterialViewModel.ExtraMaterialName;
             guncellenenUrun.Price = extraMaterialViewModel.Price;
-            guncellenenUrun.PictureName = extraMaterialViewModel.Image.FileName; //Resim koymayı yukarıda zorunlu hale getirdiğimden if koşulu koymadım
-            var dosyaKonumu = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", guncellenenUrun.PictureName);
+            
+            if (extraMaterialViewModel.Image != null &&
+                extraMaterialViewModel.Image.FileName != guncellenenUrun.PictureName)
+            {
+                if (guncellenenUrun.PictureName != null)
+                    ResimSil(guncellenenUrun);
+
+                
+                guncellenenUrun.PictureName = extraMaterialViewModel.Image.FileName;
+
+               
+                var dosyaKonumu = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images", guncellenenUrun.PictureName);
+
+               
+                var fileStream = new FileStream(dosyaKonumu, FileMode.Create);
+
+               
+                extraMaterialViewModel.Image.CopyTo(fileStream);
+
+
+                fileStream.Close();
+
+            }
 
             _db.ExtraMaterials.Update(guncellenenUrun);
             _db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+
+
+        public async Task<IActionResult> Details(int id)
+        {
+
+            var extraMaterial = await _db.ExtraMaterials
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (extraMaterial == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView("_ExtraMaterialDetailsPartial", extraMaterial);
         }
     }
 }

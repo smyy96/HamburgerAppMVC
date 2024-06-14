@@ -38,7 +38,8 @@
                         </dl>
                     </div>
                     <div class="card-footer">
-                        <form asp-action="Delete">
+                        <form asp-action="Delete" method="post">
+                            <!-- method="post" eklendi -->
                             <input type="hidden" asp-for="Id" />
                             <button type="submit" class="btn btn-danger">Sil</button>
                             <a asp-action="Index" class="btn btn-secondary ml-2">Listeye Dön</a>

@@ -16,6 +16,6 @@ namespace HamburgerAppMVC.Areas.Identity.Data.Entities.Concrete
 
         public int Total { get; set; }
 
-        public SizeMenu Size { get; set; }
+        public SizeMenu Size { get; set; } = (SizeMenu)new Random().Next(1, 4);
     }
 }

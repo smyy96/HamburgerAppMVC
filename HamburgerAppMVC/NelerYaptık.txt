@@ -193,3 +193,16 @@ Tasarımlar yapıldı.
 
 
 
+
+------------ 14.15.16/06/2024 Sümeyye Coşkun ------------------
+
+
+Sepet tasarımı yapıldı. 
+
+Sepete ürün ekleme silme adet miktarını güncelleme işlemleri yapıldı.
+
+Sepete eklenen  ürünün satın alınması kodları eklendi.
+
+UserPageController içinde sepette ait işlemler mevcut. 
+
+Basket.cshtml içerisinde ise sepete ait html tasarımı ve atın alamaya dair js ajax kodları mevcuttur.

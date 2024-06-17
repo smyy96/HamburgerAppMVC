@@ -4,6 +4,8 @@
     Layout = "_UserLayout";
 
     var categories = ViewBag.Categories as List<Category>;
+
+    bool isUserInRole = ViewBag.IsUserInRole ?? false;
 }
 
 
@@ -60,13 +62,16 @@
                                 <p class="price m-0" style="flex: 1; text-align: center;">
                                     ₺@item.Price
                                 </p>
-                                @if (ViewBag.LoginControl != null)
-                                {
+                                @if (ViewBag.LoginControl != null && isUserInRole)
+                                 {
                                     <button class="btn btn-outline-danger add-to-cart" data-id="@item.Id" style="flex-shrink: 0;"><i class="bi bi-basket-fill"></i></button>
                                 }
                                 else
                                 {
-                                    <button id="login" asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-danger" style="flex-shrink: 0;"><i class="bi bi-basket-fill"></i></button>
+                                    @* <button id="login" asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-danger" style="flex-shrink: 0;"><i class="bi bi-basket-fill"></i></button> *@
+                                    <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-danger" style="flex-shrink: 0;">
+                                        <i class="bi bi-basket-fill"></i>
+                                    </a>
                                 }
                             </div>
 
@@ -102,7 +107,7 @@
                                             ₺@itemEx.Price
                                         </p>
 
-                                        @if (ViewBag.LoginControl != null)
+                                        @if (ViewBag.LoginControl != null && isUserInRole)
                                         {
                                             <button class="btn btn-outline-danger add-to-cartEx" data-id="@itemEx.Id" style="flex-shrink: 0;"><i class="bi bi-basket-fill"></i></button>
                                         }

@@ -33,8 +33,8 @@
                                 <tr>
                                     <th> @Html.DisplayNameFor(model => model.Id)</th>
                                     <th> @Html.DisplayNameFor(model => model.ExtraMaterialName)</th>
-                                    <th> @Html.DisplayNameFor(model => model.Price)</th>  
-                                    <th> @Html.DisplayNameFor(model => model.Category.CategoryName)</th>   
+                                    <th> @Html.DisplayNameFor(model => model.Price)</th>
+                                    <th> @Html.DisplayNameFor(model => model.Category.CategoryName)</th>
                                     <th> @Html.DisplayNameFor(model => model.PictureName)</th>
                                     <th> @Html.DisplayNameFor(model => model.IsActive)</th>
                                     <th></th>
@@ -67,9 +67,8 @@
 
                                             @if (item.IsActive == true)
                                             {
-                                                <a class="btn btn-primary btn-sm ml-1" href="#">
-                                                    <i class="fas fa-folder ml-r">
-                                                    </i>
+                                                <a id="ShowModal_@item.Id" class="btn btn-primary btn-sm ml-1" href="javascript:void(0);">
+                                                    <i class="fas fa-folder ml-r"></i>
                                                     Detay
                                                 </a>
                                                 <a asp-action="Edit" asp-controller="ExtraMaterial" asp-route-id="@item.Id" class="btn btn-info btn-sm ml-1">
@@ -103,6 +102,27 @@
                                             }
                                         </td>
                                     </tr>
+
+                                    <div class="modal fade" id="exampleModal_@item.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Ekstra Lezzet Detay</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <!-- İçerik burada dinamik olarak yüklenecek -->
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" id="ModalClose_@item.Id" data-dismiss="modal">Kapat</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                 }
                             </tbody>
                         </table>
@@ -113,3 +133,32 @@
     </div>
 </section>
 
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('[id^="ShowModal"]').click(function () {
+                var itemId = $(this).attr('id').split('_')[1];
+                $.ajax({
+                    type: 'GET',
+                    url: '/ExtraMaterial/Details/' + itemId,
+                    success: function (data) {
+                        $('#exampleModal_' + itemId + ' .modal-body').html(data);
+                        $('#exampleModal_' + itemId).modal('show');
+                    },
+                    error: function () {
+                        alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+                    }
+                });
+            });
+
+            $('[id^="exampleModal"] .close, [id^="ModalClose"]').click(function () {
+                var itemId = $(this).attr('id').split('_')[1];
+                $('#exampleModal_' + itemId).modal('hide');
+            });
+        });
+
+    </script>
+
+}

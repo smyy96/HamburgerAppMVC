@@ -206,3 +206,5 @@ Sepete eklenen  ürünün satın alınması kodları eklendi.
 UserPageController içinde sepette ait işlemler mevcut. 
 
 Basket.cshtml içerisinde ise sepete ait html tasarımı ve atın alamaya dair js ajax kodları mevcuttur.
+
+Yönlendirmeler yapıldı admin user sayfasını kullanamıyor yeni üye olmalıdır.

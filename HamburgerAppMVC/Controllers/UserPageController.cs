@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using HamburgerAppMVC.Extensions;
 using Microsoft.CodeAnalysis.Elfie.Model.Tree;
+using Microsoft.AspNetCore.Authorization;
 
 
 
@@ -44,6 +45,8 @@ namespace HamburgerAppMVC.Controllers
             {
                 user = await _userManager.GetUserAsync(User);
 
+                ViewBag.IsUserInRole = await _userManager.IsInRoleAsync(user, "User");//oturum acanın rolünü user ise true
+
                 ViewBag.LoginControl = user; // user ı index sayfasında kontrol edeceğiz dolu ise satın al butonu aktif olacak boş ise login sayfasına yönlendirme yapacak.
             }
 
@@ -59,7 +62,7 @@ namespace HamburgerAppMVC.Controllers
         }
 
 
-
+        [Authorize(Roles = "User")]
         public IActionResult TemporaryBasketMenu(int id)
         {
 
@@ -78,6 +81,7 @@ namespace HamburgerAppMVC.Controllers
         }
 
 
+        [Authorize(Roles = "User")]
         public IActionResult TemporaryBasketExtraMaterial(int id)
         {
 
@@ -89,6 +93,7 @@ namespace HamburgerAppMVC.Controllers
         }
 
 
+        [Authorize(Roles = "User")]
         public IActionResult Basket()
         {
 
@@ -117,6 +122,7 @@ namespace HamburgerAppMVC.Controllers
         }
 
 
+        [Authorize(Roles = "User")]
         [HttpPost]
         public IActionResult UpdatePlusQuantity(int itemId, string itemType)
         {
@@ -149,6 +155,7 @@ namespace HamburgerAppMVC.Controllers
 
 
 
+        [Authorize(Roles = "User")]
         [HttpPost]
         public IActionResult UpdateMinusQuantity(int itemId, string itemType)
         {
@@ -173,6 +180,8 @@ namespace HamburgerAppMVC.Controllers
             return Json(new { success = true, message = "Miktar başarıyla güncellendi." });
         }
 
+
+        [Authorize(Roles = "User")]
         [HttpPost]
         public IActionResult UpdateQuantity(int itemId, string itemType, string status)
         {
@@ -209,6 +218,7 @@ namespace HamburgerAppMVC.Controllers
         }
 
 
+        [Authorize(Roles = "User")]
         [HttpPost]
         public IActionResult DeleteItem(int itemId, string itemType)
         {
@@ -241,7 +251,7 @@ namespace HamburgerAppMVC.Controllers
 
 
 
-
+        [Authorize(Roles = "User")]
         [HttpPost]
         public async Task<IActionResult> BuyCart([FromBody] double totalAmount)
         {

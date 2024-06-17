@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HamburgerAppMVC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240610221356_MenuCRUD3")]
-    partial class MenuCRUD3
+    [Migration("20240617071525_MenuSeedDataSC")]
+    partial class MenuSeedDataSC
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -124,7 +124,7 @@ namespace HamburgerAppMVC.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Picture")
+                    b.Property<string>("PictureName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -136,6 +136,71 @@ namespace HamburgerAppMVC.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("ExtraMaterials");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            ExtraMaterialName = "Coca - Cola Zero Sugar",
+                            IsActive = true,
+                            PictureName = "coca_cola_zero_sugar_33_cl_baf77227e6.jpg",
+                            Price = 35.0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 1,
+                            ExtraMaterialName = "Berry Hibiscus",
+                            IsActive = true,
+                            PictureName = "bk_berry_hibiscus_a1140aad64.jpg",
+                            Price = 50.0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 2,
+                            ExtraMaterialName = "Muffin",
+                            IsActive = true,
+                            PictureName = "muffin_3b7b7511f1.jpg",
+                            Price = 20.0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 2,
+                            ExtraMaterialName = "Çikolatalı Sufle",
+                            IsActive = true,
+                            PictureName = "cikolatali_sufle_a142511990.jpg",
+                            Price = 50.0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryId = 4,
+                            ExtraMaterialName = "Ketçap",
+                            IsActive = true,
+                            PictureName = "ketcap_32f8f33054.jpg",
+                            Price = 5.0
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryId = 5,
+                            ExtraMaterialName = "Çıtır Çıtır Atıştır",
+                            IsActive = true,
+                            PictureName = "citir_citir_atistir_d0153d6c4e.jpg",
+                            Price = 60.0
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryId = 4,
+                            ExtraMaterialName = "Buffalo Sos",
+                            IsActive = true,
+                            PictureName = "buffalo_sos_83b747af5c.jpg",
+                            Price = 6.0
+                        });
                 });
 
             modelBuilder.Entity("HamburgerAppMVC.Areas.Identity.Data.Entities.Concrete.Menu", b =>
@@ -172,29 +237,65 @@ namespace HamburgerAppMVC.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "Menu1",
+                            Description = "Whopper eti (dana), 5'' ekmek, turşu, ketçap, mayonez, göbek salata, domates, soğan",
                             IsActive = true,
-                            MenuName = "Menu1",
-                            PictureName = "menu1.jpg",
-                            Price = 100.0
+                            MenuName = "Whopper",
+                            PictureName = "whopper_90d608faab.jpg",
+                            Price = 190.0
                         },
                         new
                         {
                             Id = 2,
-                            Description = "Menu2",
+                            Description = "Etli Barbekü Brioche® + Patates Kızartması (Orta) + Kutu İçecek",
                             IsActive = true,
-                            MenuName = "Menu2",
-                            PictureName = "menu1.jpg",
-                            Price = 200.0
+                            MenuName = "Etli Barbekü Brioche Menü",
+                            PictureName = "etli_barbeku_brioche_menu_187fd3fb30_84eaff0f97.jpg",
+                            Price = 195.0
                         },
                         new
                         {
                             Id = 3,
-                            Description = "Menu3",
+                            Description = "3 Adet Whopper Jr. + Patates Kızartması (Büyük) + 1L. İçecek",
                             IsActive = true,
-                            MenuName = "Menu3",
-                            PictureName = "menu1.jpg",
-                            Price = 300.0
+                            MenuName = "3''lü Whopper Fırsatı",
+                            PictureName = "3lu_whopper_firsati_b77b9c5a7e.jpg",
+                            Price = 330.0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Big King + King Chicken + Patates Kızartması (Orta) + 1L İçecek",
+                            IsActive = true,
+                            MenuName = "Kral İkili Menü",
+                            PictureName = "kral_ikili_a68fca6955.jpg",
+                            Price = 270.0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "Big King + Big King + Patates Kızartması (Orta) + 1L. İçecek",
+                            IsActive = true,
+                            MenuName = "2''li Big King",
+                            PictureName = "2li_big_king_firsati_f8f3a3eaae.jpg",
+                            Price = 365.0
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Description = "Baharatlı Steak Köftesi, 4,5'' ekmek, mayonez, domates, göbek salata, 2 dilim peynir, özel steak sos, çıtır soğan",
+                            IsActive = true,
+                            MenuName = "Steakhouse Burger",
+                            PictureName = "bk_steakhouse_burger_ff2d3a53c9.jpg",
+                            Price = 250.0
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Description = "Texas Smokehouse Burger, Whopper eti (dana), 4,5” ekmek, 2 dilim cheddar peyniri, füme kaburga et, barbekü sos, çıtır soğan",
+                            IsActive = true,
+                            MenuName = "Texas Smokehouse Burger",
+                            PictureName = "texas_smokehouse_burger_bbaf4383e6.jpg",
+                            Price = 265.0
                         });
                 });
 
@@ -335,7 +436,7 @@ namespace HamburgerAppMVC.Migrations
                         {
                             Id = "66A51954-D206-4000-9F81-F73FE061B52D",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a6187889-1957-4d48-b5af-ceea42c17bcb",
+                            ConcurrencyStamp = "42c1813f-7569-4946-b606-dabdabd7e9e3",
                             Email = "kullanici@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
@@ -344,7 +445,7 @@ namespace HamburgerAppMVC.Migrations
                             NormalizedUserName = "KULLANICI@GMAIL.COM",
                             PasswordHash = "AQAAAAIAAYagAAAAEPxaUcQBXHjUxxAfHVSITSYFV7tkSgf4S1YEeppkOo0al0WcB7QNhp7YKFJzZMTN+Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "021b50d3-72a5-4aa8-aa2f-cd66e86893a7",
+                            SecurityStamp = "7c1b228c-ad09-47e5-b27b-ef43455ac8f8",
                             Surname = "Kullanici Surname",
                             TwoFactorEnabled = false,
                             UserName = "kullanici@gmail.com"
@@ -353,7 +454,7 @@ namespace HamburgerAppMVC.Migrations
                         {
                             Id = "031A45EF-18ED-4BBC-80E5-D0E6FE65908C",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e2754814-e9c8-4b55-835f-a0fac6b20b84",
+                            ConcurrencyStamp = "dc3fea83-ef76-41f0-8b37-5de9b37ae083",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
@@ -362,7 +463,7 @@ namespace HamburgerAppMVC.Migrations
                             NormalizedUserName = "ADMIN@GMAIL.COM",
                             PasswordHash = "AQAAAAIAAYagAAAAEPxaUcQBXHjUxxAfHVSITSYFV7tkSgf4S1YEeppkOo0al0WcB7QNhp7YKFJzZMTN+Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "88835783-da2b-4aec-8b53-671720238f34",
+                            SecurityStamp = "f3634bc0-5628-4093-9fcf-f670fb1e223c",
                             Surname = "Admin",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"

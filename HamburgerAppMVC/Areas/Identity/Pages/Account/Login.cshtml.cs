@@ -124,8 +124,6 @@ namespace HamburgerAppMVC.Areas.Identity.Pages.Account
 
 
 
-
-
                     // giriş esnasında role göre controller yönlendirmesi yapma SC
 
                     var user = await _userManager.FindByEmailAsync(Input.Email); //kullanıcının epostasıile blgilerini alma

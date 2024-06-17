@@ -234,29 +234,65 @@ namespace HamburgerAppMVC.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "Menu1",
+                            Description = "Whopper eti (dana), 5'' ekmek, turşu, ketçap, mayonez, göbek salata, domates, soğan",
                             IsActive = true,
-                            MenuName = "Menu1",
-                            PictureName = "menu1.jpg",
-                            Price = 100.0
+                            MenuName = "Whopper",
+                            PictureName = "whopper_90d608faab.jpg",
+                            Price = 190.0
                         },
                         new
                         {
                             Id = 2,
-                            Description = "Menu2",
+                            Description = "Etli Barbekü Brioche® + Patates Kızartması (Orta) + Kutu İçecek",
                             IsActive = true,
-                            MenuName = "Menu2",
-                            PictureName = "menu1.jpg",
-                            Price = 200.0
+                            MenuName = "Etli Barbekü Brioche Menü",
+                            PictureName = "etli_barbeku_brioche_menu_187fd3fb30_84eaff0f97.jpg",
+                            Price = 195.0
                         },
                         new
                         {
                             Id = 3,
-                            Description = "Menu3",
+                            Description = "3 Adet Whopper Jr. + Patates Kızartması (Büyük) + 1L. İçecek",
                             IsActive = true,
-                            MenuName = "Menu3",
-                            PictureName = "menu1.jpg",
-                            Price = 300.0
+                            MenuName = "3''lü Whopper Fırsatı",
+                            PictureName = "3lu_whopper_firsati_b77b9c5a7e.jpg",
+                            Price = 330.0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Big King + King Chicken + Patates Kızartması (Orta) + 1L İçecek",
+                            IsActive = true,
+                            MenuName = "Kral İkili Menü",
+                            PictureName = "kral_ikili_a68fca6955.jpg",
+                            Price = 270.0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "Big King + Big King + Patates Kızartması (Orta) + 1L. İçecek",
+                            IsActive = true,
+                            MenuName = "2''li Big King",
+                            PictureName = "2li_big_king_firsati_f8f3a3eaae.jpg",
+                            Price = 365.0
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Description = "Baharatlı Steak Köftesi, 4,5'' ekmek, mayonez, domates, göbek salata, 2 dilim peynir, özel steak sos, çıtır soğan",
+                            IsActive = true,
+                            MenuName = "Steakhouse Burger",
+                            PictureName = "bk_steakhouse_burger_ff2d3a53c9.jpg",
+                            Price = 250.0
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Description = "Texas Smokehouse Burger, Whopper eti (dana), 4,5” ekmek, 2 dilim cheddar peyniri, füme kaburga et, barbekü sos, çıtır soğan",
+                            IsActive = true,
+                            MenuName = "Texas Smokehouse Burger",
+                            PictureName = "texas_smokehouse_burger_bbaf4383e6.jpg",
+                            Price = 265.0
                         });
                 });
 
@@ -397,7 +433,7 @@ namespace HamburgerAppMVC.Migrations
                         {
                             Id = "66A51954-D206-4000-9F81-F73FE061B52D",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "72ea2a3b-3040-42e3-b20d-f9429f3eebea",
+                            ConcurrencyStamp = "42c1813f-7569-4946-b606-dabdabd7e9e3",
                             Email = "kullanici@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
@@ -406,7 +442,7 @@ namespace HamburgerAppMVC.Migrations
                             NormalizedUserName = "KULLANICI@GMAIL.COM",
                             PasswordHash = "AQAAAAIAAYagAAAAEPxaUcQBXHjUxxAfHVSITSYFV7tkSgf4S1YEeppkOo0al0WcB7QNhp7YKFJzZMTN+Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0f47f277-13b9-468e-9974-b5530a3d20a0",
+                            SecurityStamp = "7c1b228c-ad09-47e5-b27b-ef43455ac8f8",
                             Surname = "Kullanici Surname",
                             TwoFactorEnabled = false,
                             UserName = "kullanici@gmail.com"
@@ -415,7 +451,7 @@ namespace HamburgerAppMVC.Migrations
                         {
                             Id = "031A45EF-18ED-4BBC-80E5-D0E6FE65908C",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3676616d-674a-4096-b52e-35e8e62264ab",
+                            ConcurrencyStamp = "dc3fea83-ef76-41f0-8b37-5de9b37ae083",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
@@ -424,7 +460,7 @@ namespace HamburgerAppMVC.Migrations
                             NormalizedUserName = "ADMIN@GMAIL.COM",
                             PasswordHash = "AQAAAAIAAYagAAAAEPxaUcQBXHjUxxAfHVSITSYFV7tkSgf4S1YEeppkOo0al0WcB7QNhp7YKFJzZMTN+Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "cc59c995-3246-4433-890e-b4f13f1418f3",
+                            SecurityStamp = "f3634bc0-5628-4093-9fcf-f670fb1e223c",
                             Surname = "Admin",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"

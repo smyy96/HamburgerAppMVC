@@ -1,0 +1,213 @@
+﻿@model List<Menu>
+
+@{
+    Layout = "_UserLayout";
+
+    var categories = ViewBag.Categories as List<Category>;
+
+    bool isUserInRole = ViewBag.IsUserInRole ?? false;
+}
+
+
+<section id="menu" class="menu section">
+
+
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Menülerimize</h2>
+        <p><span>Bir</span> <span class="description-title">Bakalım</span></p>
+    </div>
+
+    <div class="container">
+
+        <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+
+            <li class="nav-item">
+                <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#menu-starters">
+                    <h4>Tümünü Görüntüle</h4>
+                </a>
+            </li>
+            @foreach (var item in ViewBag.Categories)
+            {
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-@item.CategoryName.ToLower().Replace(" ", "-")">
+                        <h4>@item.CategoryName</h4>
+                    </a>
+                </li>
+            }
+        </ul>
+
+
+        @* Bütün menülerin yüklendiği yer *@
+        <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
+
+            <div class="tab-pane fade active show" id="menu-starters">
+
+                <div class="tab-header text-center">
+                    <p>Menü</p>
+                    <h3>Bütün Menü</h3>
+                </div>
+
+                <div class="row gy-5">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-4 menu-item">
+                            <img src="~/Images/@item.PictureName" class="menu-img img-fluid" alt="@item.MenuName" />
+                            @* <a href="~/Images/@item.PictureName" class="menu-img img-fluid" alt="@item.MenuName"></a> *@
+                            <h4>@item.MenuName</h4>
+                            <p class="ingredients">
+                                @item.Description
+                            </p>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="price m-0" style="flex: 1; text-align: center;">
+                                    ₺@item.Price
+                                </p>
+                                @if (ViewBag.LoginControl != null && isUserInRole)
+                                 {
+                                    <button class="btn btn-outline-danger add-to-cart" data-id="@item.Id" style="flex-shrink: 0;"><i class="bi bi-basket-fill"></i></button>
+                                }
+                                else
+                                {
+                                    @* <button id="login" asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-danger" style="flex-shrink: 0;"><i class="bi bi-basket-fill"></i></button> *@
+                                    <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-danger" style="flex-shrink: 0;">
+                                        <i class="bi bi-basket-fill"></i>
+                                    </a>
+                                }
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+
+
+            @* kategorilerine göre extra malzemelerin yüklenildiği kısım *@
+            @foreach (var item in ViewBag.Categories)
+            {
+                <div class="tab-pane fade" id="menu-@item.CategoryName.ToLower().Replace(" ", "-")">
+
+                    <div class="tab-header text-center">
+                        <p>Menu</p>
+                        <h3>@item.CategoryName</h3>
+                    </div>
+
+                    <div class="row gy-5">
+                        @foreach (var itemEx in ViewBag.ExtraM)
+                        {
+                            if (itemEx.CategoryId == item.Id)
+                            {
+                                <div class="col-lg-4 menu-item">
+                                    <img src="~/Images/@itemEx.PictureName" class="menu-img img-fluid" alt="@itemEx.ExtraMaterialName">
+                                    <h4>@itemEx.ExtraMaterialName</h4>
+
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="price m-0" style="flex: 1; text-align: center;">
+                                            ₺@itemEx.Price
+                                        </p>
+
+                                        @if (ViewBag.LoginControl != null && isUserInRole)
+                                        {
+                                            <button class="btn btn-outline-danger add-to-cartEx" data-id="@itemEx.Id" style="flex-shrink: 0;"><i class="bi bi-basket-fill"></i></button>
+                                        }
+                                        else
+                                        {
+                                            <button id="login" asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-danger" data-id="@itemEx.Id" style="flex-shrink: 0;"><i class="bi bi-basket-fill"></i></button>
+                                        }
+
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+<!-- Modal Ürün almak için butona tıklanıldıgı zaman ürün eklenilmiştir diye uyarı mesajı veren kısım-->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Ürün Sepete Eklendi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @* Mesaj buraya yükleniyor action'dan' *@
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section Scripts {
+    <script>
+        //Burada secilen menu kaydedilmesi için actiona yönlendiriliyor.
+        $(document).ready(function () {
+            $(".add-to-cart").click(function () {
+                var productId = $(this).data("id");
+
+                $.ajax({
+                    url: '@Url.Action("TemporaryBasketMenu", "UserPage")',
+                    type: 'POST',
+                    data: {
+                        id: productId
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            $('#successModal').modal('show'); // Success modalını göster
+                            $('#successModal .modal-body').text(response.message);
+                        } else {
+                            alert("Ürün sepete eklenirken bir hata oluştu.");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Bir hata oluştu: " + error);
+                    }
+                });
+            });
+
+
+
+            //Burada secilen Ekstra mal. kaydedilmesi için actiona yönlendiriliyor.
+
+            $(".add-to-cartEx").click(function () {
+                var productId = $(this).data("id");
+
+                $.ajax({
+                    url: '@Url.Action("TemporaryBasketExtraMaterial", "UserPage")',
+                    type: 'POST',
+                    data: {
+                        id: productId
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            $('#successModal').modal('show'); // Success modalını göster
+                            $('#successModal .modal-body').text(response.message); //Mesajı Modala yükle
+                        } else {
+                            alert("Ürün sepete eklenirken bir hata oluştu.");
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Bir hata oluştu: " + error);
+                    }
+                });
+            });
+        });
+    </script>
+}

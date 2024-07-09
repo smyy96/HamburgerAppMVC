@@ -1,0 +1,48 @@
+﻿@using HamburgerAppMVC.Areas.Identity.Data
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<User> SignInManager
+
+@{
+    bool isUserInRole = ViewBag.IsUserInRole ?? false;
+}
+
+
+
+<header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container position-relative d-flex align-items-center justify-content-between">
+
+        <a asp-controller="UserPage" asp-action="Index" class="logo d-flex align-items-center me-auto me-xl-0">
+            <!-- Uncomment the line below if you also wish to use an image logo -->
+            <!-- <img src="assets/img/logo.png" alt=""> -->
+            <h1 class="sitename">HES HAMBURGER</h1>
+            <span>.</span>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li><a asp-controller="UserPage" asp-action="Index" class="active">Giriş<br></a></li>
+                <li><a asp-controller="UserPage" asp-action="Index">Hakkımızda</a></li>
+                <li><a asp-controller="UserPage" asp-action="Index">Menü</a></li>
+                <li><a asp-controller="UserPage" asp-action="Index">Şeflerimiz</a></li>
+                <li><a asp-controller="UserPage" asp-action="Index">İletişim</a></li>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <partial name="_UserLoginPartial.cshtml" />
+
+
+        @* sepet iconu ekledim SC *@
+        @* @if (SignInManager.IsSignedIn(User)) *@
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <a class="btn-getstarted" asp-controller="UserPage" asp-action="Basket">Sepet <i class="bi bi-basket-fill" style="margin-left: 8px;"></i></a>
+        }
+        else
+        {
+            <a type="hidden" class="btn-getstarted" href="">sepet <i class="bi bi-basket-fill" style="margin-left: 8px;"></i></a>
+        }
+
+    </div>
+</header>

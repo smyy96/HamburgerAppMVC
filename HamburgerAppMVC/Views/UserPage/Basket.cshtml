@@ -1,0 +1,363 @@
+﻿@model BasketViewModel
+
+@{
+    Layout = "_UserBasketLayout";
+    var categories = ViewBag.Categories as List<Category>;
+}
+
+<!-- Section Title -->
+<div class="container section-title" data-aos="fade-up">
+    <h2>Satın Al</h2>
+    <p><span>Sepetinizdeki </span><span class="description-title">ürünleriniz<br></span></p>
+</div><!-- End Section Title -->
+
+<div class="row">
+    <div class="col-8">
+        <section id="book-a-table" class="book-a-table section">
+            <div class="container">
+                <div class="d-flex align-items-center reservation-form-bg" data-aos="fade-up" data-aos-delay="200">
+                    <div class="container mt-3" data-aos="fade-up" data-aos-delay="100">
+                        <table class="table table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Ürün</th>
+                                    <th>Adet</th>
+                                    <th>Fiyat</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.MenuBasketList)
+                                {
+                                    var quantity = Model.MenuItemQuantities[item.Id];
+                                    <tr>
+                                        <td><img height="50px" width="60px" src="~/Images/@item.PictureName" alt="Resim Yok" /></td>
+                                        <td>@item.MenuName</td>
+                                        <td>
+                                            <div class="input-group" style="display: flex; align-items: center;">
+                                                <button class="btn btn-outline-secondary btn-minus" type="button" data-id="@item.Id" data-type="menu">-</button>
+                                                <input type="text" class="form-control text-center" style="max-width: 50px;" value="@quantity" readonly>
+                                                <button class="btn btn-outline-secondary btn-plus" type="button" data-id="@item.Id" data-type="menu">+</button>
+                                            </div>
+                                        </td>
+                                        <td data-price-per-item="@item.Price" class="total-price">@((item.Price * quantity).ToString("F2")) TL</td>
+                                        <td><button class="btn btn-outline-danger btn-delete" data-id="@item.Id" data-type="menu"><i class="bi bi-trash"></i></button></td>
+                                    </tr>
+                                }
+
+                                @foreach (var item in Model.ExtraMaterialBasketList)
+                                {
+                                    var quantity = Model.ExtraMaterialItemQuantities[item.Id];
+                                    <tr>
+                                        <td><img height="50px" width="60px" src="~/Images/@item.PictureName" alt="Resim Yok" /></td>
+                                        <td>@item.ExtraMaterialName</td>
+                                        <td>
+                                            <div class="input-group" style="display: flex; align-items: center;">
+                                                <button class="btn btn-outline-secondary btn-minus" type="button" data-id="@item.Id" data-type="extra">-</button>
+                                                <input type="text" class="form-control text-center" style="max-width: 50px;" value="@quantity" readonly>
+                                                <button class="btn btn-outline-secondary btn-plus" type="button" data-id="@item.Id" data-type="extra">+</button>
+                                            </div>
+                                        </td>
+                                        <td data-price-per-item="@item.Price" class="total-price">@((item.Price * quantity).ToString("F2")) TL</td>
+                                        <td><button class="btn btn-outline-danger btn-delete" data-id="@item.Id" data-type="extra"><i class="bi bi-trash"></i></button></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="col-4">
+        <section id="order-summary" class="book-a-table section">
+            <div class="container">
+                <div class="d-flex align-items-center reservation-form-bg p-2 pb-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="container mt-3" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card p-1">
+                            <div class="card-body">
+                                <div class="container section-title" data-aos="fade-up" style="padding-bottom: 10px;">
+                                    <p><span class="description-title">Sipariş Özeti<br></span></p>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span class="total-label">Sipariş Tutarı:</span>
+                                        <span id="totalOrderAmount" class="total-price text-right">0 TL</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span class="total-label">Teslimat Ücreti:</span>
+                                        <span class="total-price text-right">23 TL</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span class="total-label" style="font-size:20px; font-weight: bold;">Genel Toplam:</span>
+                                        <span id="totalAmount" class="total-price text-right" style="font-size:20px; font-weight: bold;">0 TL</span>
+                                    </li>
+                                </ul>
+                                <div class="container p-3" data-aos="fade-up" data-aos-delay="100">
+                                    <div class="col-md-12 text-center">
+                                        <form id="confirmOrderForm">
+                                            <!-- Diğer form elemanları burada -->
+                                            <input type="hidden" id="totalAmountInput" name="totalAmount">
+                                            <button type="submit" id="confirmOrderBtn" class="btn btn-danger" style="border: 1px solid #ce1212;">Sepeti Onayla</button>
+                                        </form>
+                                        @* <button id="confirmOrderBtn" class="btn btn-danger" style="border: 1px solid #ce1212;">Sepeti Onayla</button> *@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- Sipariş Onaylama Başarılı Modal -->
+<div class="modal fade" id="orderSuccessModal" tabindex="-1" aria-labelledby="orderSuccessModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="orderSuccessModalLabel">Sipariş Onay Ekranı</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="orderSuccessMessage"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+           
+            let isDeliveryFeeAdded = false;
+            updateTotalAmount();
+
+            document.querySelectorAll('.btn-plus').forEach(button => {
+                button.addEventListener('click', function () {
+                    adjustQuantity(this, 'plus');
+                });
+            });
+
+            document.querySelectorAll('.btn-minus').forEach(button => {
+                button.addEventListener('click', function () {
+                    adjustQuantity(this, 'minus');
+                });
+            });
+
+            function adjustQuantity(button, action) {
+                let itemId = button.dataset.id;
+                let itemType = button.dataset.type;
+                let input = button.parentElement.querySelector('input');
+                let currentValue = parseInt(input.value);
+                let newValue = action === 'plus' ? currentValue + 1 : currentValue - 1;
+                let status = action === 'plus' ? 'plus' : 'minus';
+                console.log(status);
+                if (newValue > 0) {
+                    input.value = newValue;
+
+                    let priceCell = button.closest('tr').querySelector('.total-price');
+                    let pricePerItem = parseFloat(priceCell.getAttribute('data-price-per-item').replace(',', '.'));
+                    priceCell.textContent = (newValue * pricePerItem).toFixed(2).replace('.', ',') + ' TL';
+
+                    updateTotalAmount();
+                    updateQuantity(itemId, status, itemType);
+                }
+            }
+
+
+            function updateTotalAmount() {
+                let totalAmount = 0;
+                document.querySelectorAll('tbody tr').forEach(row => {
+                    let quantityInput = row.querySelector('input');
+                    let pricePerItem = parseFloat(row.querySelector('.total-price').getAttribute('data-price-per-item').replace(',', '.'));
+                    let quantity = parseInt(quantityInput.value);
+
+                    totalAmount += quantity * pricePerItem;
+                });
+
+
+                // Eğer teslimat ücreti henüz eklenmemişse ve sepet boş değilse 23 TL ekleyin
+                if (!isDeliveryFeeAdded && totalAmount > 0) {
+                    totalAmount += 23; // Teslimat ücreti 23 TL
+                    totalOrderAmount = totalAmount - 23;
+                    isDeliveryFeeAdded = true; // Tekrar eklenmemesi için true işaretlendi
+                }
+
+
+                document.getElementById('totalAmount').textContent = totalAmount.toFixed(2).replace('.', ',') + ' TL';
+                document.getElementById('totalOrderAmount').textContent = totalOrderAmount.toFixed(2).replace('.', ',') + ' TL';
+
+            }
+
+            function updateQuantity(itemId, status, itemType) {
+                let url = `/UserPage/UpdateQuantity?itemId=${itemId}&itemType=${itemType}&status=${status}`;
+                console.log("Sending request to: ", url);
+
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ itemId: itemId, itemType: itemType, status: status })
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok ' + response.statusText);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Item quantities successfully updated:', data);
+                        location.reload();
+                    })
+                    .catch(error => {
+                        console.error('Error updating item quantities:', error);
+                    });
+
+
+            }
+
+            document.getElementById('confirmOrderBtn').addEventListener('click', function () {
+                // Implement your confirmation logic here
+                console.log('Order confirmed');
+            });
+
+
+
+
+            document.querySelectorAll('.btn-delete').forEach(button => {
+                button.addEventListener('click', function () {
+                    let itemId = this.dataset.id;
+                    let itemType = this.dataset.type;
+                    deleteItem(itemId, itemType);
+                });
+            });
+
+
+
+            function deleteItem(itemId, itemType) {
+                let url = `/UserPage/DeleteItem?itemId=${itemId}&itemType=${itemType}`;
+
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ itemId: itemId, itemType: itemType })
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok ' + response.statusText);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Item successfully deleted:', data);
+                        // Burada sayfayı yenilemek yerine, DOM üzerinde ilgili satırı kaldırabilirsiniz.
+                        let row = document.querySelector(`tr[data-id="${itemId}"][data-type="${itemType}"]`);
+                        if (row) {
+                            row.remove();
+                            updateTotalAmount(); // Toplam tutarı güncelleyin
+                        }
+                        location.reload();
+                    })
+                    .catch(error => {
+                        console.error('Error deleting item:', error);
+                    });
+            }
+
+
+
+            const confirmOrderForm = document.getElementById('confirmOrderForm');
+            if (confirmOrderForm) {
+                confirmOrderForm.addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+                    const totalAmount = parseFloat(document.getElementById('totalAmount').textContent.replace(',', '.').replace(' TL', ''));
+                    document.getElementById('totalAmountInput').value = totalAmount;
+
+                    fetch('/UserPage/BuyCart', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(totalAmount)
+                    })
+                        .then(response => response.json())
+                        .then(data => {                          
+
+                            // Başarıyla tamamlanmışsa
+                            if (data.success) {
+                                // Gerekli alanları sıfırla veya güncelle
+                                document.getElementById('totalAmount').textContent = '0 TL';
+                                document.getElementById('totalAmountInput').value = 0;
+                                document.getElementById('totalOrderAmount').textContent = '0 TL';
+                                
+                                isDeliveryFeeAdded = false; // Teslimat ücretini sıfırla
+
+                                // Modalı aç
+                                    $('#orderSuccessModal').modal('show');
+                                    $('#orderSuccessMessage').text(data.message);
+
+
+
+
+                                // Güncellemeyi yap
+                                updateOrderSummary(totalAmount);
+
+                                // Sayfa yenileme işlemi, eğer gerekliyse
+                                //location.reload();                         
+
+                            }                           
+                        })
+                        .catch(error => {
+                            console.error('Error confirming order:', error);
+                        });
+                });
+            }
+
+            //satın alma işleminden sonra fiyatalrı sıfırlama
+            function updateOrderSummary(totalAmount) {
+                // let deliveryFee = 23; // Sabit teslimat ücreti
+                // let totalOrderAmount = totalAmount + deliveryFee;
+
+                document.getElementById('totalAmount').textContent = totalAmount.toFixed(2).replace('.', ',') + ' TL';
+                document.getElementById('totalOrderAmount').textContent = totalOrderAmount.toFixed(2).replace('.', ',') + ' TL';
+
+                // document.getElementById('totalAmount').textContent = '0 TL';
+                // document.getElementById('totalAmountInput').value = 0;
+                // document.getElementById('totalOrderAmount').textContent = '0 TL';
+            }
+
+
+            // Modal kapatma işlemi sonrasında sayfayı yenile
+            $('#orderSuccessModal').on('hidden.bs.modal', function (e) {
+                location.reload();
+            });
+        });
+    </script>
+}

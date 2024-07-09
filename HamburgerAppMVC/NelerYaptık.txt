@@ -1,0 +1,210 @@
+﻿
+-------- 10.06.2024 Sümeyye Coşkun --------
+
+Identity krulumu yapıldı. program.cs dosyasına app.MapRazorPages(); eklendi 
+
+Kurulum ile gelen tablolardan user - role- userrole tablolarına "Areas.Identity.Data.EntityConfigurations" içindeki config sınıflarında seed data ile roller ve iki adet kullanıcı eklendi. Admin sistemde bir tane olacağı için hep bu admin ile sisteme giriş yapılacak. Kullanıcı ise istenilen kadar kayıt ekranından kaydedebilirsiniz. Rolleri de seed data ile ekledim bundan sonra kayıt ekranında kayıt olan herkes sisteme user rolü ile otomatik kayıt olacaktır. 
+
+Bunu HamburgerAppMVC.Areas.Identity.Pages.Account register.cshtml.cs yerden bakabilirsiniz.
+
+
+aynı yerden login.cshtml.cs kısmında ise giriş yapanın rolüne göre sayfa yönlendirmesi yapılacak. Adminse admin paneli acılacak. User ise hamburger ekranı.
+
+
+kayıt esnasında mail adresine onay mesajı da gidiyor.
+
+
+bunun için program.cs  builder.Services.AddSingleton<MailSenderConfirm>();  eklendi
+daha sonra data klasörüne mailsenderConfirm sınıfı eklendi.
+ 
+ HamburgerAppMVC.Areas.Identity.Pages.Account   RegisterConfirmationModel.cshtml.cs içinede mail göndermesi için kod satırı eklendi
+
+
+
+ database ayarları için appsetting altında kendi adınıza dosya açtım orada server adınızı değiştirin daha sonra yapacagınız her update-database'in yanına asağıdaki kelimeyi eklemelisiniz
+
+
+Update-database -Args '--environment Eysan' //eyşan için
+
+
+Update-database -Args '--environment Hivda'  //hivda için
+
+
+Update-database yapmayı unutmayın.SC
+
+
+
+
+
+
+
+
+-------- 10.06.2024 Hivda Karahan --------
+
+
+Admin Paneli Layout bölümü eklendi.
+
+
+Admin panelini privacy kısmı içeriyor. Bunun için Privacy.cshtml partial view'ına Layout'un _AdminLayout'tan geleceğini belirten ' Layout = "_AdminLayout"; ' ifadesi eklendi.
+
+
+
+_AdminLayout.cshtml adında bir partial view eklendi. 
+
+_AdminLayout.cshtml içinde sırasıyla NavBar, MainSidebarContainer ve Footer adında partial view dosyaları asenkron olarak çağrıldı.
+
+
+_NavBar.cshtml partial view'ı, boş ve beyaz bir navigasyon çubuğunu içeriyor.
+
+_MainSidebarContainer.cshtml, sayfanın admin paneli olduğunu gösteren bir bölüm, admin kullanıcıları ve ikonlarını içeren bir bölüm ve ikonlarıyla beraber 3 alt bölümden oluşuyor. Alt bölüm menü, kategori ve ekstra lezzetleri içeriyor.
+
+_Footer.cshtml, admin paneli olduğunu gösteren bir alt bölümü içeriyor.
+
+
+Eklenilen resimlerin hepsi bağlantı yolu olduğundan resim klasörünün içinde ayrıca belirtmedim.
+
+Menü, Kategoriler ve Ekstra Lezetlerin CRUD işlemleri ve tasarımlarına geçerken _MainSİdebarContainer.cshtml dosyası içindeki asp-controller ve asp-action ifadelerini değiştirmeyi unutmayın.
+
+
+
+-------- 10.06.2024 Eyşan Tekinsoy --------
+
+Concrete dosyasında yer alan Menu sınıfı içerisindeki ""Picture"" prop unu ""PictureName"" olarak güncellendim.
+
+wwwroot klasörüne Images dosyası açtım ve içerisine örnek bir menü fotoğrafı ekledim.
+
+Menu Controller sisteme eklendim. Controller üzerinde Crud İşlemlerini gerçekleştirdim.
+
+İndex.cshtml tasarımı ortak tasarıma dönüştürüldü. Listelemedeki datalar seed data olarak eklendi. 
+
+Yeni Menü Ekleme,Silme butonları test edildi çalışıyor. Tasarım kısmında ortak karara göre değişiklik yapılabilir. 
+
+add-migration ve update database yapmayı unutmayın.
+
+
+
+
+
+-------- 11.06.2024 Hivda Karahan --------
+
+Ekstra Malzemelerin CRUD işlemleri yapıldı.
+
+CRUD işlemlerinin kodu Menu ve Kategori ile benzer durumda. 
+
+Şuan için submit etme kısmında hata alıyorum. 
+
+CRUD işlemlerin hepsinin kodu tam ve kontrol edildi, diğer commitleri almak için projeyi gite gönderiyorum, sizinkileri fetch edip hataların giderilmesi ve tasarım üzerinde çalışacağım.
+
+
+
+-------- 11.06.2024 Eyşan Tekinsoy --------
+
+
+AppSetting.Development alanı içerisinde  AppDbConStr satırı çoklatılarak kendi bilgisayarım için satır oluşturdum. 
+
+Çalışırken kendi server adınızın commentini açmayı unutmayın.
+
+Menu CRUD işlemlerinde detay butonunun kodları geliştirildi.
+
+Güncelleme butonunda Development Mode ile ilgili hata mevcuttu. View daki kodlarda düzenleme yapılmasının ardından sorun düzeldi. 
+
+Controller üzerinde Crud İşlemleri gerçekleştirildi.
+
+Detay ve Delete lere ait cshtml ler sistemden kaldırıldı. Index sayfası üzerinden yüklenmesi sağlandı. 
+
+
+
+
+------------ 11.06.2024 Sümeyye Coşkun ------------
+
+category controller oluşturuldu.
+
+_AdminLayout kısmına kategori butonunun linki eklendi
+
+Category index sayfası tasarlandı. Şuan sadece listeleme yapıyor.
+
+Category.cs dosyasında proplara [DisplayName("Kategori Adı")] özellikleri eklendi.
+
+
+Category detay kısmını ekledim. Detay için ayrı cshtml açmadım index.cshtml için de javascript dosyası ile yükleniyor detaylar
+
+Category Crud bitti.
+
+Login sayfasının tasarımı yapıldı ve menu indexe yönlendirildi.
+
+admin paneli cıkıs yap butonu eklendi.
+
+kullanıcı kayıt ol sayfası tasarlandı.
+
+
+-------- 12.06.2024 Eyşan Tekinsoy --------
+
+Ortak kararlaştırılan Kullanıcı arayüzü sisteme dahil edildi.
+
+Bu arayüz tasarıma ait dosyalar wwwroot klasörü içerisinde UserTema dosyasına eklendi. 
+
+Kullanıcının bu ekranları görebilmesi için UserPageController açıldı. Index view'ıne menü kod bloğu eklendi. 
+
+_UserLayout daki menü alanı render edildi. Diğer alanlar ise Partial viewlere bölünerek dahil edildi. 
+
+
+
+
+------------ 12.06.2024 Sümeyye Coşkun ------------
+
+UserPageController da index sayfası hazırlandı.
+ 
+Index sayfası menuler ve extra malzeme bilgileri ile dolu şekilde geliyor.
+
+
+
+------------ 13.06.2024 Sümeyye Coşkun ------------
+
+ExtraMal için seed data ekledim UPDATE DATABASE yapmayı unutmayın.
+
+Menu ve Ekstra Mal. düzenlendi. 
+
+UserPageControllerın Index sayfasına ürünlerin nasıl listelendiği eklendi. 
+
+satın al butonuna tıklayınca başka bir action yönlendiriliyor ve listeye ürünler kaydediliyor.
+
+login kısmını userpage ekledim kullanıcı giriş cıkıs işlemlerini yapabiliyor oturum açmayan kullanıcılar satın alma işlemi yapamıyor.
+
+
+
+------------ 13.06.2024 Hivda Karahan ------------
+
+Ekstra malzemeler create için hataları gidermeye çalıştım.
+
+Yeni ekstra lezzet ekle kısmına kategoriyi comboboxolarak ekledim.
+
+Detay, düzenle ve create kısmında dosya yükleme hataları var, onları gidermeye uğraşıyorum.
+
+
+
+
+------------ 13.06.2024 Hivda Karahan ------------
+
+ExtraMaterial için create kısmındaki hataların tümü giderildi.
+
+Detay, düzenle ve sil kısımlarındaki hatalar da giderildi.
+
+Tasarımlar yapıldı.
+
+
+
+
+------------ 14.15.16/06/2024 Sümeyye Coşkun ------------------
+
+
+Sepet tasarımı yapıldı. 
+
+Sepete ürün ekleme silme adet miktarını güncelleme işlemleri yapıldı.
+
+Sepete eklenen  ürünün satın alınması kodları eklendi.
+
+UserPageController içinde sepette ait işlemler mevcut. 
+
+Basket.cshtml içerisinde ise sepete ait html tasarımı ve atın alamaya dair js ajax kodları mevcuttur.
+
+Yönlendirmeler yapıldı admin user sayfasını kullanamıyor yeni üye olmalıdır.

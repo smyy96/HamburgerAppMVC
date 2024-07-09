@@ -1,0 +1,74 @@
+﻿<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a asp-controller="Menu" asp-action="Index" class="brand-link">
+        @* <img src="~/admin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> *@
+        <img src="https://cdn-icons-png.flaticon.com/512/2942/2942813.png" alt="AdminPaneli Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">Admin Paneli</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="https://avatars.githubusercontent.com/u/141020548?v=4" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="image">
+                <img src="https://avatars.githubusercontent.com/u/88027952?v=4" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="image">
+                <img src="https://avatars.githubusercontent.com/u/62007900?v=4" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">HES</a>
+            </div>
+        </div>
+
+        
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+                     with font-awesome or any other icon font library -->
+                <li class="nav-item mt-4">
+                    <a asp-controller="Menu" asp-action="Index" class="nav-link" style="display: flex; align-items: center; padding: 0;">
+                        <div class="image ml-2" style="margin-right: 10px;">
+                            <img src="https://i.pinimg.com/736x/02/c6/a4/02c6a44ac0aa9d4217a68d8675f985f0.jpg" class="img-circle elevation-2" alt="Menu Image" style="width: 40px; height: 40px;">
+                        </div>
+                        <p style="margin: 0;">
+                            Menü
+                        </p>
+                    </a>
+                </li>
+
+
+                <li class="nav-item mt-2">
+                    <a asp-controller="Category" asp-action="Index" class="nav-link" style="display: flex; align-items: center; padding: 0;">
+                        <div class="image ml-2" style="margin-right: 10px;">
+                            <img src="https://images.vexels.com/media/users/3/185225/isolated/lists/cc21d796204923937547f509844f7eba-hamburger-icon-hamburger.png" class="img-circle elevation-2" alt="Kategori Image" style="width: 40px; height: 40px;">
+                        </div>
+                        <p style="margin: 0;">
+                            Kategoriler
+                        </p>
+                    </a>
+                </li>
+
+
+                <li class="nav-item mt-2">
+                    <a asp-controller="ExtraMaterial" asp-action="Index" class="nav-link" style="display: flex; align-items: center; padding: 0;">
+                        <div class="image ml-2" style="margin-right: 10px;">
+                            <img src="https://st.depositphotos.com/3262633/54246/i/1600/depositphotos_542468854-stock-photo-fried-chicken-nuggets-black-background.jpg" class="img-circle elevation-2" alt="Ekstra Malzeme Image" style="width: 40px; height: 40px;">
+                        </div>
+                        <p style="margin: 0;">
+                            Ekstra Lezzetler
+                        </p>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>

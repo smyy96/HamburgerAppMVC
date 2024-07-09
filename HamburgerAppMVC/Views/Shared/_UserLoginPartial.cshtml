@@ -1,0 +1,52 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using HamburgerAppMVC.Areas.Identity.Data
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+
+@{
+    bool isUserInRole = ViewBag.IsUserInRole ?? false;
+}
+
+
+
+<ul class="navbar-nav">
+    @* @if (SignInManager.IsSignedIn(User)) *@
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <div class="d-flex align-items-center">
+        <li class="nav-item mr-3">
+            <a id="manage" asp-area="Identity" title="Manage">Hoşgeldiniz @UserManager.GetUserAsync(User).Result.Name</a>
+        </li>
+
+        <li class="nav-item">
+                @* <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"> *@
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/UserPage/Index" method="post">
+                <button id="logout" type="submit" class="btn btn-outline-danger" style="border-radius: 50%;
+                        border: 1px solid #ce1212;
+                        width: 35px;
+                        height:35px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+    margin-left: 25px;">
+                    <i class="bi-box-arrow-right" style="font-size: 1.2rem; padding-top: 1px;"></i>
+                </button>
+                    @* <button id="logout" type="submit"><i class="bi bi-box-arrow-right"></i></button> *@
+            </form>
+        </li>
+        </div>
+    }
+    else
+    {
+        <div class="d-flex align-items-center">
+        <li class="nav-item">
+            <a id="register" asp-area="Identity" asp-page="/Account/Register">Kayıt Ol</a>
+        </li>
+        <li class="nav-item">
+            <a id="login" asp-area="Identity" asp-page="/Account/Login" style="margin-left: 25px;">Giriş Yap</a>
+        </li>
+        </div>
+    }
+</ul>

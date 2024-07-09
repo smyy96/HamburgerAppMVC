@@ -1,0 +1,164 @@
+﻿@model IEnumerable<ExtraMaterial>
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<section class="content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12 mt-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Ekstra Lezzet Listesi</h3>
+
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+
+                                <div class="input-group-append">
+                                    <a class="btn btn-success btn-sm" asp-action="Create" asp-controller="ExtraMaterial">
+                                        <i class="fas fa-plus mr-1">
+                                        </i>
+                                        Ekstra Lezzet Ekle
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th> @Html.DisplayNameFor(model => model.Id)</th>
+                                    <th> @Html.DisplayNameFor(model => model.ExtraMaterialName)</th>
+                                    <th> @Html.DisplayNameFor(model => model.Price)</th>
+                                    <th> @Html.DisplayNameFor(model => model.Category.CategoryName)</th>
+                                    <th> @Html.DisplayNameFor(model => model.PictureName)</th>
+                                    <th> @Html.DisplayNameFor(model => model.IsActive)</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Id</td>
+                                        <td>@item.ExtraMaterialName</td>
+                                        <td>@item.Price</td>
+                                        <td>@item.Category.CategoryName</td>
+                                        <td> <img height="60px" width="60px" src="~/Images/@item.PictureName" alt="Resim Yok" /> </td>
+                                        <td>
+
+                                            @if (item.IsActive == true)
+                                            {
+                                                <span class="badge badge-success">Aktif </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-danger">Pasif </span>
+                                            }
+                                        </td>
+
+                                        <td class="project-actions text-right">
+
+                                            @if (item.IsActive == true)
+                                            {
+                                                <a id="ShowModal_@item.Id" class="btn btn-primary btn-sm ml-1" href="javascript:void(0);">
+                                                    <i class="fas fa-folder ml-r"></i>
+                                                    Detay
+                                                </a>
+                                                <a asp-action="Edit" asp-controller="ExtraMaterial" asp-route-id="@item.Id" class="btn btn-info btn-sm ml-1">
+                                                    <i class="fas fa-pencil-alt mr-1">
+                                                    </i>
+                                                    Düzenle
+                                                </a>
+                                                <a asp-action="Delete" asp-controller="ExtraMaterial" asp-route-id="@item.Id" class="btn btn-danger btn-sm ml-1">
+                                                    <i class="fas fa-trash mr-1">
+                                                    </i>
+                                                    Sil
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn btn-primary btn-sm ml-1 disabled" href="#">
+                                                    <i class="fas fa-folder ml-r">
+                                                    </i>
+                                                    Detay
+                                                </a>
+                                                <a asp-action="Edit" asp-controller="ExtraMaterial" asp-route-id="@item.Id" class="btn btn-info btn-sm ml-1 disabled">
+                                                    <i class="fas fa-pencil-alt mr-1">
+                                                    </i>
+                                                    Düzenle
+                                                </a>
+                                                <a asp-action="Delete" asp-controller="ExtraMaterial" asp-route-id="@item.Id" class="btn btn-danger btn-sm ml-1 disabled">
+                                                    <i class="fas fa-trash mr-1">
+                                                    </i>
+                                                    Sil
+                                                </a>
+                                            }
+                                        </td>
+                                    </tr>
+
+                                    <div class="modal fade" id="exampleModal_@item.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Ekstra Lezzet Detay</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <!-- İçerik burada dinamik olarak yüklenecek -->
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" id="ModalClose_@item.Id" data-dismiss="modal">Kapat</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('[id^="ShowModal"]').click(function () {
+                var itemId = $(this).attr('id').split('_')[1];
+                $.ajax({
+                    type: 'GET',
+                    url: '/ExtraMaterial/Details/' + itemId,
+                    success: function (data) {
+                        $('#exampleModal_' + itemId + ' .modal-body').html(data);
+                        $('#exampleModal_' + itemId).modal('show');
+                    },
+                    error: function () {
+                        alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+                    }
+                });
+            });
+
+            $('[id^="exampleModal"] .close, [id^="ModalClose"]').click(function () {
+                var itemId = $(this).attr('id').split('_')[1];
+                $('#exampleModal_' + itemId).modal('hide');
+            });
+        });
+
+    </script>
+
+}

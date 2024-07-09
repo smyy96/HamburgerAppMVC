@@ -1,0 +1,12 @@
+﻿@model HamburgerAppMVC.Areas.Identity.Data.Entities.Concrete.Category
+
+@* <div>
+    <h4>@Model.CategoryName</h4>
+    <p><strong>Durum:</strong> @(Model.IsActive ? "Aktif" : "Pasif")</p>
+</div> *@
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title text-dark">@Model.CategoryName</h3>
+        <p class="card-text"><strong>Durum:</strong> <span class="badge @(Model.IsActive ? "badge-success" : "badge-danger")">@((Model.IsActive ? "Aktif" : "Pasif"))</span></p>
+    </div>
+</div>
